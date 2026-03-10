@@ -11,6 +11,13 @@
 - subagent sleep 在 Gateway 重启时会静默失败，不可靠。
 - 参考命令详见 `TOOLS.md` "Scheduled Tasks" 章节。
 
+### 定时任务时区规范（强制）
+- **所有 cron 表达式必须以北京时间（CST, Asia/Shanghai）为准直接填写**，禁止自行换算成 UTC。
+- 创建/编辑 cron 时，tz 参数已默认为 `Asia/Shanghai`，无需手动换算，写几点就是北京几点。
+- ❌ 错误示范：想要 21:00 CST，写成 `0 13 * * *`（错误地减去了8小时）
+- ✅ 正确示范：想要 21:00 CST，直接写 `0 21 * * *`，tz=Asia/Shanghai
+- 创建任务后，**必须用 `openclaw cron list` 核查 nextRunAt 时间是否符合预期**，确认无误后才算完成。
+
 ### 截图规范
 - 浏览器截图前，**必须将 viewport 宽度设为 1920px**，避免触发移动端布局和 CJK 字体渲染问题。
 - 参考流程详见 `TOOLS.md` "Screenshot Quality Protocol" 章节。
