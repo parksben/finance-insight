@@ -174,6 +174,44 @@ osascript -e 'set v to output volume of (get volume settings)' \
 
 ---
 
+## Web Search / 联网搜索
+
+### SearXNG 自托管搜索引擎
+
+本机部署了 SearXNG，所有 agent 均可直接调用。
+
+- **服务地址：** `http://localhost:8080`
+- **部署方式：** podman 容器，开机自启（systemd: `searxng.service`）
+- **配置文件：** `/opt/searxng/config/settings.yml`
+- **聚合引擎：** Google / Bing / DuckDuckGo（默认）
+
+**API 调用方式（推荐）：**
+```bash
+# 直接 curl JSON API
+curl -s "http://localhost:8080/search?q=<query>&format=json&language=zh-CN"
+
+# 或使用封装脚本
+searxng-search "搜索词" [结果数量]
+# 例：searxng-search "今日A股行情" 5
+```
+
+**在 agent 代码中使用：**
+```bash
+# web_search 工具暂不支持自定义后端，使用 exec 调用脚本
+exec: searxng-search "你的搜索词" 10
+# 或直接 web_fetch: http://localhost:8080/search?q=...&format=json
+```
+
+**管理命令：**
+```bash
+podman ps | grep searxng          # 查看状态
+podman restart searxng            # 重启
+podman logs searxng               # 查看日志
+systemctl status searxng          # systemd 状态
+```
+
+---
+
 ## System Fonts
 
 CJK (Chinese/Japanese/Korean) fonts installed:
