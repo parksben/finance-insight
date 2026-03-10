@@ -41,6 +41,22 @@ Add whatever helps you do your job. This is your cheat sheet.
 
 ---
 
+## Backup & Persistence
+
+### 自动备份机制
+- **备份脚本**：`/root/openclaw-backup/scripts/backup.sh`（入口：`/usr/local/bin/openclaw-backup-run`）
+- **备份仓库**：https://github.com/parksben/parksben-openclaw（private）
+- **定时任务**：每天 **00:00 CST** 自动执行（cron job: `nightly-openclaw-backup`）
+- **备份内容**：整个 `/root/.openclaw/`（workspace/配置/会话/cron）、Caddy 配置、工具脚本
+- **手动触发**：`openclaw-backup-run`
+
+### 注意事项
+- workspace 本身也有本地 git（`/root/.openclaw/workspace`），重要变更需 `git commit`
+- `/usr/local/bin/` 下的脚本会被备份，但建议优先放 `workspace/scripts/`（纳入 workspace git）
+- 备份日志可通过 `openclaw cron runs --id <nightly-openclaw-backup-id>` 查看
+
+---
+
 ## File Upload & Artifact Management
 
 ### upload-artifact Command
