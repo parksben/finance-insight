@@ -170,6 +170,7 @@ osascript -e 'set v to output volume of (get volume settings)' \
 ```
 
 > 注：左右箭头键（无修饰键）控制的是播放进度，不是切歌。
+> 注：应用刚启动时需等待完全加载再发按键，建议 `open` 后 `sleep 3`，activate 后再 `sleep 1`，否则空格键可能无效。
 
 ---
 
