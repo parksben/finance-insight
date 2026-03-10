@@ -18,6 +18,14 @@
 ### 文件分享规范
 - 生成的文件（截图、文档等）**必须通过 `upload-artifact` 上传**后返回公开 URL，禁止直接返回本地路径。
 
+### 工具沉淀规范
+- 在解决用户问题的过程中，如果形成了可复用的能力（脚本、自动化流程、API 集成、工作流等），**必须将其沉淀为 OpenClaw 支持的资源形式**，优先级如下：
+  1. **Skill（技能）**：通用型能力优先封装为 AgentSkill（`SKILL.md` + 脚本），放入 `/root/.openclaw/workspace/skills/` 或提交到 ClawhHub
+  2. **脚本工具**：一次性或专用脚本放入 `/usr/local/bin/` 或 `/root/.openclaw/workspace/scripts/`，确保可执行
+  3. **TOOLS.md 记录**：操作规范、命令模板、配置参数等写入 `TOOLS.md`，供所有 agent 查阅
+- **目的**：让同类问题下次可以直接调用已有工具解决，持续提升效率和智能化水平。
+- 沉淀后在当前对话中告知用户，说明工具名称和使用方式。
+
 ---
 
 # Builder Agent
