@@ -105,6 +105,30 @@ exec: upload-artifact <path> "name.jpg"
 
 **Why 1920px:** Narrower viewports trigger mobile layouts and font fallbacks that break Chinese/CJK rendering.
 
+## Scheduled Tasks / 定时任务策略
+
+**强制规则：** 所有定时提醒、周期任务，必须使用 `openclaw cron`，禁止用 subagent + sleep 实现。
+
+**原因：** subagent sleep 依赖 agent 进程存活，Gateway 重启会导致任务静默失败。`openclaw cron` 由 Gateway scheduler 管理，重启后自动恢复。
+
+**常用命令：**
+```bash
+# 查看所有 cron 任务
+openclaw cron list
+
+# 添加一次性提醒（--once 指定具体时间）
+openclaw cron add --once "2026-03-10 10:30" --prompt "提醒 PengAn 交落户材料"
+
+# 添加周期任务（标准 cron 表达式）
+openclaw cron add --cron "30 10 * * 1" --prompt "每周一上午10:30提醒..."
+
+# 查看运行历史
+openclaw cron runs
+
+# 删除任务
+openclaw cron rm <job-id>
+```
+
 ## System Fonts
 
 CJK (Chinese/Japanese/Korean) fonts installed:
