@@ -147,6 +147,34 @@ openclaw cron rm <job-id>
 
 ## System Fonts
 
+## Mac 音乐控制（网易云音乐）
+
+通过 AppleScript + osascript 控制，需要 **辅助功能权限**（系统设置 → 隐私与安全性 → 辅助功能 → 开启 OpenClaw）。
+
+```bash
+# 播放 / 暂停（空格键）
+osascript -e 'tell application "NeteaseMusic" to activate' && sleep 0.3 && \
+osascript -e 'tell application "System Events" to keystroke space'
+
+# 下一首（Cmd + →）
+osascript -e 'tell application "NeteaseMusic" to activate' && sleep 0.3 && \
+osascript -e 'tell application "System Events" to key code 124 using {command down}'
+
+# 上一首（Cmd + ←）
+osascript -e 'tell application "NeteaseMusic" to activate' && sleep 0.3 && \
+osascript -e 'tell application "System Events" to key code 123 using {command down}'
+
+# 调节系统音量（+20）
+osascript -e 'set v to output volume of (get volume settings)' \
+          -e 'set volume output volume (v + 20)'
+```
+
+> 注：左右箭头键（无修饰键）控制的是播放进度，不是切歌。
+
+---
+
+## System Fonts
+
 CJK (Chinese/Japanese/Korean) fonts installed:
 - `google-noto-sans-cjk-ttc-fonts` — Noto Sans CJK SC/TC/JP/KR
 - Location: `/usr/share/fonts/google-noto-cjk/`
