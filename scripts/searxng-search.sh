@@ -1,7 +1,10 @@
 #!/bin/bash
 # searxng-search.sh - Query local SearXNG instance and return JSON results
-# Usage: searxng-search.sh "<query>" [limit]
-# Example: searxng-search.sh "A股今日行情" 5
+# Usage: searxng-search "<query>" [limit]
+# Example: searxng-search "A股今日行情" 5
+#
+# Config: /root/.openclaw/workspace/searxng/settings.yml
+# Container: podman (searxng), port 8080, auto-start via systemd searxng.service
 
 QUERY="${1}"
 LIMIT="${2:-10}"

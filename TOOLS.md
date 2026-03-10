@@ -182,7 +182,7 @@ osascript -e 'set v to output volume of (get volume settings)' \
 
 - **服务地址：** `http://localhost:8080`
 - **部署方式：** podman 容器，开机自启（systemd: `searxng.service`）
-- **配置文件：** `/opt/searxng/config/settings.yml`
+- **配置文件：** `/root/.openclaw/workspace/searxng/settings.yml`（已纳入 workspace 备份）
 - **聚合引擎：** Google / Bing / DuckDuckGo（默认）
 
 **API 调用方式（推荐）：**
@@ -190,7 +190,7 @@ osascript -e 'set v to output volume of (get volume settings)' \
 # 直接 curl JSON API
 curl -s "http://localhost:8080/search?q=<query>&format=json&language=zh-CN"
 
-# 或使用封装脚本
+# 或使用脚本（实体文件在 workspace/scripts/，同步备份至 /usr/local/bin/）
 searxng-search "搜索词" [结果数量]
 # 例：searxng-search "今日A股行情" 5
 ```
