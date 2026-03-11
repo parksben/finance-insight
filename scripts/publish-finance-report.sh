@@ -15,7 +15,7 @@ KNOWLEDGE_DIR="$FINANCE_PROJECT/knowledge"
 TRADING_DIR="$FINANCE_PROJECT/trading"
 REPORTS_DIR="$FINANCE_PROJECT/reports"
 REPO="parksben/finance-insight"
-PAGES_BASE="https://parksben.github.io/finance-insight"
+PAGES_BASE="https://fin.parksben.xyz"
 SITE_REPO_DIR="/tmp/finance-site-publish"
 
 echo "📦 开始发布 $DATE_FMT 报告..."
