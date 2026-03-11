@@ -1,0 +1,322 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "30b02482-83b7-42ba-9f76-507a172b876c",
+      "agentId": "main",
+      "name": "nightly-openclaw-backup",
+      "enabled": true,
+      "createdAtMs": 1773092435973,
+      "updatedAtMs": 1773158428396,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 0 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Execute /usr/local/bin/openclaw-backup-run in terminal. Then report: commit id, changed files count, and push result. If push fails, include exact error and suggest fix briefly."
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "wecom",
+        "to": "group:default",
+        "accountId": "default"
+      },
+      "state": {
+        "nextRunAtMs": 1773244800000,
+        "lastRunAtMs": 1773158400010,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 28386,
+        "lastError": "[object Object]",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1,
+        "lastFailureAlertAtMs": 1773158428398
+      },
+      "failureAlert": {
+        "after": 1,
+        "channel": "wecom",
+        "to": "group:default",
+        "cooldownMs": 3600000,
+        "accountId": "default"
+      }
+    },
+    {
+      "id": "33abc8c6-f002-4e0f-8053-8a6af78a243c",
+      "name": "finance-daily-learn",
+      "description": "澜投研-每日学习头部理财博主方法论",
+      "enabled": true,
+      "createdAtMs": 1773128075863,
+      "updatedAtMs": 1773198115261,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，执行「澜投研」每日学习任务。\n\n## 写作要求（重要）\n- **必须标注出处**：每条学到的方法论/观点附原始来源链接 `[作者/机构名](URL)`\n- **图文并茂**：如原文有精华图表，截图上传 artifact 后嵌入 `![描述](URL)`\n- **方法论更新要注明版本**：追加到 methodology.md 时标注日期\n\n## 步骤\n1. 用 `searxng-search` 搜索今日头部理财博主/机构（雪球KOL、华尔街见闻、格隆汇、聪明投资者等）的最新观点（保留原始 URL）\n2. 提炼投资分析方法论要点，追加到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/methodology.md`（每条注明来源链接和日期）\n3. 保存今日学习摘要到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-learn.md`（含原始来源链接列表）\n4. 执行命令发布到网站：exec: publish-finance-report $(date +%Y%m%d)\n5. 在群里发「📚 今日学习完成」，包含2-3条核心方法论收获 + 网站链接"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "wecom"
+      },
+      "state": {
+        "nextRunAtMs": 1773277200000
+      }
+    },
+    {
+      "id": "41396990-fb4b-4a71-9610-ea69c666111c",
+      "name": "finance-weekly-report",
+      "description": "澜投研-每周前沿洞察报告",
+      "enabled": true,
+      "createdAtMs": 1773128080702,
+      "updatedAtMs": 1773198117721,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * 1",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，执行「澜投研」每周洞察报告任务。\n\n步骤：\n1. 读取本周每日学习记录（knowledge/daily-*.md）和市场情报\n2. 基于方法论输出「澜投研周报」：方法论更新、市场主线、机会/风险、投资箴言\n3. 保存到 /root/.openclaw/workspace/projects/finance-insight/reports/weekly-$(date +%Y%m%d).md\n4. 执行命令发布：exec: publish-finance-report $(date +%Y%m%d)\n5. 在群里发简短通知（不超过150字）：「📊 澜投研周报已发布 + 核心结论 + 网址链接」"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "wecom"
+      },
+      "state": {
+        "nextRunAtMs": 1773626400000
+      }
+    },
+    {
+      "id": "d8f4ddce-a9d2-4ed7-8b2c-e17989e07bef",
+      "name": "finance-portfolio-review",
+      "description": "澜投研-每周模拟盘收益分析",
+      "enabled": true,
+      "createdAtMs": 1773128486893,
+      "updatedAtMs": 1773198120286,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * 6",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，执行澜投研模拟交易周度复盘任务。\n\n## 写作要求（重要）\n- **图文并茂**：更新 `docs/data/portfolio.json` 后，网站会自动渲染 ECharts 图表（净值曲线/持仓分布/盈亏柱状图）\n- **数据同步**：每次复盘后必须更新 portfolio.json，保持网站实时数据准确\n\n## 步骤\n1. 读取 `trading/portfolio.md` 和 `transactions.md`，用 `searxng-search` 搜索持仓标的最新价格\n2. 更新持仓市值和盈亏，与沪深300对比\n3. 追加复盘内容到 `trading/review.md`，更新 `portfolio.md` 快照\n4. **更新 `docs/data/portfolio.json`**（网站图表数据源）：\n   - summary: 更新总资产、累计收益率、本周收益率、最大回撤、胜率、vs沪深300\n   - positions: 当前持仓列表（含 name/direction/weight/cost/price/pnl/shares 字段）\n   - history: 追加今日净值记录 {date, nav, csi300}（nav=当前总资产/1000000，csi300用沪深300同期净值对比）\n   - transactions: 追加本周交易记录\n5. 执行命令发布：exec: publish-finance-report $(date +%Y%m%d)\n6. 在群里发「🌊 澜投研模拟盘周报」简短版（不超过150字）：总资产、本周收益、1-2条经验 + 详情链接"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "wecom"
+      },
+      "state": {
+        "nextRunAtMs": 1773453600000
+      }
+    },
+    {
+      "id": "1ffdace7-1656-43a3-b384-107fbe9d37a2",
+      "name": "finance-monthly-introspect",
+      "description": "澜投研-每月认知反思与方法论迭代",
+      "enabled": true,
+      "createdAtMs": 1773128711792,
+      "updatedAtMs": 1773198131747,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 1 * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，执行每月认知反思任务。\n\n步骤：\n1. 读取过去一个月的 daily-*.md 和 review.md，统计模拟盘月度表现\n2. 识别系统性偏差，更新 knowledge/methodology.md（标注版本）\n3. 评估 sources.md 信息源质量\n4. 如有重大认知升级，更新 SOUL.md Growth Principles 并告知 PengAn\n5. 保存月度报告到 reports/monthly-$(date +%Y%m).md\n6. 执行命令发布：exec: publish-finance-report $(date +%Y%m%d)\n7. 在群里发「🧠 澜投研月度反思报告」简短版（不超过200字）：方法论版本、核心升级点、下月方向 + 详情链接"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "wecom"
+      },
+      "state": {
+        "nextRunAtMs": 1775005200000
+      }
+    },
+    {
+      "id": "fbd5bcb3-978c-4fb1-a93b-5597f4a1d85f",
+      "name": "finance-evening-research",
+      "description": "澜投研-晚间情报采集(Researcher)",
+      "enabled": true,
+      "createdAtMs": 1773128827401,
+      "updatedAtMs": 1773198054714,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 21 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，扮演 [Researcher] 角色。任务：客观采集今日市场情报，不含主观判断。\n\n## 写作要求（重要）\n- **必须标注出处**：每条信息后附原始来源链接，格式：`[来源名称](URL)`\n- **图文并茂**：遇到图表、K线图、数据图时，截图或引用原图（图片可上传到 `upload-artifact` 后贴 URL）\n- **结构化表格**：指数涨跌幅用 Markdown 表格展示\n\n## 步骤\n1. 用 `searxng-search` 搜索：A股/港股/美股今日重大事件、重要宏观数据、产业政策动向、主要指数涨跌幅（搜索结果保留原始 URL）\n2. 将结果以结构化 Markdown 格式保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md`\n   - 每条数据/事件必须在末尾注明来源：`[来源名](URL)`\n   - 如搜索结果含图片，用 `![描述](图片URL)` 嵌入\n   - 在文件末尾加「## 参考来源」列出所有链接\n3. 不要发消息到群里，只保存文件\n4. 完成后在群里发一条简短通知：「🔍 [Researcher] 今日情报已采集完毕，等待多 Agent 分析中...」"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1773234000000,
+        "lastRunAtMs": 1773190800010,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 140882,
+        "lastError": "⚠️ ✉️ Message failed",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 1
+      }
+    },
+    {
+      "id": "8289f62e-1b0a-4e30-a363-4b8896ff9dea",
+      "name": "finance-evening-strategist",
+      "description": "澜投研-晚间投资信号(Strategist)",
+      "enabled": true,
+      "createdAtMs": 1773128829970,
+      "updatedAtMs": 1773198064936,
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 21 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，扮演 [Strategist] 角色，进攻型思维。\n\n## 写作要求（重要）\n- **必须标注逻辑依据**：每个信号附上支撑论据的原始出处链接\n- **图文并茂**：用表格展示信号矩阵，必要时引用 K 线截图或技术指标图（上传到 artifact 后贴 URL）\n- **量化表达**：仓位用具体百分比，不用「适当」「少量」等模糊词\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md` 和方法论 `methodology.md`\n2. 生成投资信号矩阵（Markdown 表格）：标的 | 方向 | 仓位% | 进场价区间 | 止损位 | 逻辑摘要 | 来源\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-strategist.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知：「📈 [Strategist] 投资信号已生成」"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1773234600000,
+        "lastRunAtMs": 1773191400011,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 130286,
+        "lastError": "⚠️ ✉️ Message failed",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 1
+      }
+    },
+    {
+      "id": "694ef798-c981-47b9-9ee8-009b0c3a6b5f",
+      "name": "finance-evening-riskguard",
+      "description": "澜投研-晚间风险评估(RiskGuard)",
+      "enabled": true,
+      "createdAtMs": 1773128832385,
+      "updatedAtMs": 1773198078364,
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 21 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，扮演 [RiskGuard] 角色，保守型思维。\n\n## 写作要求（重要）\n- **必须标注风险依据**：每个风险点附原始出处链接\n- **图文并茂**：可引用 VIX 指数截图、波动率图、资金流向图等（上传 artifact 后贴 URL）\n- **量化风险**：用概率/评分描述风险等级，不用「较大」等模糊词\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md` 和当前持仓 `portfolio.md`\n2. 输出风险评估报告：\n   - 主要风险点清单（附出处链接）\n   - 建议最大仓位（数字）\n   - 各标的止损位\n   - 回避板块/标的清单\n   - 整体风险评级（1-5分）\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/trading/daily-$(date +%Y%m%d)-riskguard.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知：「🛡️ [RiskGuard] 风险评估已完成」"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1773234600000,
+        "lastRunAtMs": 1773191530297,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 82201,
+        "lastError": "⚠️ ✉️ Message failed",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 1
+      }
+    },
+    {
+      "id": "6eb9f1b5-2576-4350-a14d-7eb4db4019a6",
+      "name": "finance-evening-challenger",
+      "description": "澜投研-晚间反驳质疑(Challenger)",
+      "enabled": true,
+      "createdAtMs": 1773128834829,
+      "updatedAtMs": 1773198080848,
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 21 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，扮演 [Challenger] 角色，反向思维。\n\n## 写作要求（重要）\n- **必须标注反驳依据**：每个反向论据附原始出处链接\n- **图文并茂**：引用历史行情截图、对比图等佐证反向观点（上传 artifact 后贴 URL）\n- **历史类比要具体**：给出具体日期、具体涨跌幅数据\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md`\n2. 系统性反驳主流判断：\n   - 被忽视的负面信号（附来源链接）\n   - 共识过度集中的风险信号\n   - 历史类比：给出具体时间、背景、结局数据\n   - 反向操作逻辑和预期收益\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-challenger.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知：「🔴 [Challenger] 质疑意见已生成」"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1773234600000,
+        "lastRunAtMs": 1773191612498,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 155432,
+        "lastError": "⚠️ ✉️ Message failed",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 1
+      }
+    },
+    {
+      "id": "5d687c78-5c54-4db7-850d-3978a8021859",
+      "name": "finance-evening-arbiter",
+      "description": "澜投研-晚间最终裁决(Arbiter)",
+      "enabled": true,
+      "createdAtMs": 1773128837316,
+      "updatedAtMs": 1773198096095,
+      "schedule": {
+        "kind": "cron",
+        "expr": "20 21 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是小小澜，扮演 [Arbiter] 最终裁决者角色。\n\n## 写作要求（重要）\n- **图文并茂**：裁决报告应包含分歧对比表格，关键数据可引用图表（上传 artifact 后贴 URL）\n- **量化结论**：操作建议必须包含具体标的、仓位%、价格区间\n- **出处已在各子报告中标注**，Arbiter 只需综合，无需重复标注\n\n## 步骤\n1. 读取今日四份报告（均在 `/root/.openclaw/workspace/projects/finance-insight/`）：\n   - `knowledge/daily-$(date +%Y%m%d)-research.md`\n   - `knowledge/daily-$(date +%Y%m%d)-strategist.md`\n   - `trading/daily-$(date +%Y%m%d)-riskguard.md`\n   - `knowledge/daily-$(date +%Y%m%d)-challenger.md`\n2. 综合四方视角，输出最终裁决：是否有明确操作信号、核心分歧点、最终仓位建议\n3. 记录 Strategist vs Challenger 分歧到 `trading/disputes.md`\n4. 如有操作，写入 `transactions.md` 并更新 `portfolio.md` 和 `docs/data/portfolio.json`（更新净值历史数组 history[]）\n5. 保存裁决到 `knowledge/daily-$(date +%Y%m%d)-arbiter.md`\n6. 执行命令发布报告到 GitHub Pages：\n   exec: publish-finance-report $(date +%Y%m%d)\n   等待命令输出中的 PAGE_URL=... 这一行\n7. 在群里发送今日播报（简洁，不超过200字）：\n\n🌊 澜投研 · $(date +%Y-%m-%d) 日报\n\n[用2-3句话概括今日核心结论和操作决策]\n\n📊 完整报告：[从 PAGE_URL 获取的网址]"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "wecom"
+      },
+      "state": {
+        "nextRunAtMs": 1773235200000,
+        "lastRunAtMs": 1773192000009,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 232933,
+        "lastError": "⚠️ ✉️ Message failed",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 1
+      }
+    }
+  ]
+}
