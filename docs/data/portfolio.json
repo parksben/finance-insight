@@ -16,15 +16,15 @@
       "symbol": "518880",
       "name": "黄金ETF（华安）",
       "direction": "多",
-      "cost": 10.80,
-      "price": 10.80,
-      "quantity": 9259,
+      "cost": 10.974,
+      "price": 10.974,
+      "quantity": 9113,
       "currentValue": 100000,
       "pnl": "0",
       "pnlPct": "0.00%",
       "entryDate": "2026-03-11",
       "weight": 0.10,
-      "stopLoss": 10.26,
+      "stopLoss": 10.43,
       "stopLossPct": "-5.00%",
       "logic": "美伊地缘风险持续发酵 + 三方共识避险资产，止损-5%"
     }
@@ -48,11 +48,11 @@
       "date": "2026-03-11",
       "asset": "518880 黄金ETF",
       "action": "买入",
-      "shares": 9259,
-      "price": 10.80,
+      "shares": 9113,
+      "price": 10.974,
       "amount": -100000,
       "cash": 900000,
-      "reason": "Arbiter裁决：三方共识避险资产；美伊地缘风险+黄金5000整理；仓位10%，止损-5%（10.26）"
+      "reason": "Arbiter裁决：三方共识避险资产；美伊地缘风险+黄金5000整理；仓位10%，止损-5%（10.43）"
     }
   ]
 }
