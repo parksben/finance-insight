@@ -56,6 +56,7 @@ function getDailySidebar() {
 }
 
 export default defineConfig({
+  base: '/',
   title: '澜投研',
   description: '每日投资分析报告 · 多 Agent 协作框架',
   lang: 'zh-CN',
