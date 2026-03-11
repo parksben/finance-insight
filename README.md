@@ -2,7 +2,7 @@
 
 > 多 Agent 协作投资分析框架 · 每日自动生成报告 · 静态网站展示
 
-**在线访问：** https://parksben.github.io/finance-insight/
+**在线访问：** https://fin.parksben.xyz
 
 ---
 
@@ -18,11 +18,11 @@
 
 | 角色 | 职责 | 思维倾向 |
 |------|------|--------|
-| 🔍 **Researcher** | 客观采集当日市场数据、宏观事件、行业动态，不含主观判断 | 中立 |
+| 🔍 **Researcher** | 客观采集当日市场数据、宏观事件、行业动态，不含主观判断；每条数据标注原始来源链接 | 中立 |
 | 📈 **Strategist** | 基于情报生成投资信号，给出标的、方向、仓位建议 | 进攻型 |
 | 🛡️ **RiskGuard** | 独立审查策略风险，设定止损位和仓位上限 | 保守型 |
 | 🔴 **Challenger** | 专门寻找策略逻辑漏洞，提出反向论据，防止群体迷思 | 批判型 |
-| ⚖️ **Arbiter** | 综合四方意见，给出最终操作决策，记录核心分歧 | 综合型 |
+| ⚖️ **Arbiter** | 综合四方意见，给出最终操作决策，记录核心分歧，触发报告发布 | 综合型 |
 
 标准协作流程：
 
@@ -44,22 +44,25 @@ Researcher → Strategist → [RiskGuard + Challenger 并行] → Arbiter
 | 21:10 | Strategist / RiskGuard / Challenger 并行分析 |
 | 21:20 | Arbiter 综合裁决 + 发布报告 |
 
+此外每日 09:00 有独立的学习任务（`finance-daily-learn`），追踪头部博主方法论并更新知识库。
+
 ### 发布流程
 
 ```
-各 Agent 生成 Markdown 报告
+各 Agent 生成 Markdown 报告（含图片和出处链接）
         ↓
 Arbiter 调用 publish-finance-report 脚本
         ↓
-脚本将报告文件复制到本仓库 docs/daily/<YYYYMMDD>/
+脚本将报告复制到本仓库 docs/daily/<YYYYMMDD>/
+同步更新 docs/data/portfolio.json（模拟盘净值/持仓数据）
         ↓
 生成当日 index.md（汇总页）
         ↓
 git commit & push → 触发 GitHub Actions
         ↓
-VitePress 构建静态网站（约 30 秒）
+VitePress 构建静态网站（约 30-60 秒）
         ↓
-部署到 GitHub Pages
+部署到 GitHub Pages（自定义域名 fin.parksben.xyz）
         ↓
 脚本返回 PAGE_URL，通过企业微信发送到群组
         ↓
@@ -72,21 +75,32 @@ VitePress 构建静态网站（约 30 秒）
 finance-insight/
 ├── docs/
 │   ├── .vitepress/
-│   │   └── config.mts          # VitePress 配置（侧边栏自动生成）
+│   │   ├── config.mts              # VitePress 配置（侧边栏自动生成）
+│   │   └── theme/
+│   │       ├── index.ts            # 自定义主题入口
+│   │       ├── custom.css          # 移动端适配样式
+│   │       └── components/
+│   │           └── PortfolioDashboard.vue  # 模拟盘图表组件（ECharts）
 │   ├── daily/
 │   │   └── YYYYMMDD/
-│   │       ├── index.md        # 当日汇总页
-│   │       ├── research.md     # Researcher 情报
-│   │       ├── strategist.md   # Strategist 信号
-│   │       ├── riskguard.md    # RiskGuard 风控
-│   │       ├── challenger.md   # Challenger 质疑
-│   │       └── arbiter.md      # Arbiter 裁决
-│   ├── index.md                # 首页
-│   └── about.md                # 框架介绍
+│   │       ├── index.md            # 当日汇总页
+│   │       ├── research.md         # Researcher 情报（含出处链接）
+│   │       ├── strategist.md       # Strategist 信号
+│   │       ├── riskguard.md        # RiskGuard 风控
+│   │       ├── challenger.md       # Challenger 质疑
+│   │       └── arbiter.md          # Arbiter 裁决
+│   ├── portfolio/
+│   │   └── index.md                # 模拟盘实况页（ECharts 图表）
+│   ├── data/
+│   │   └── portfolio.json          # 模拟盘数据（Arbiter 每日自动更新）
+│   ├── public/
+│   │   └── CNAME                   # 自定义域名配置
+│   ├── index.md                    # 首页
+│   └── about.md                    # 框架介绍
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # GitHub Actions 自动构建部署
-└── package.json                # VitePress 依赖
+│       └── deploy.yml              # GitHub Actions 自动构建部署
+└── package.json                    # VitePress + ECharts 依赖
 ```
 
 ---
@@ -94,8 +108,9 @@ finance-insight/
 ## 技术栈
 
 - **静态站生成器：** [VitePress](https://vitepress.dev/)
+- **图表库：** [ECharts](https://echarts.apache.org/)（模拟盘净值/持仓/盈亏可视化）
 - **全文搜索：** VitePress 内置 Local Search（无需外部服务）
-- **部署：** GitHub Pages（GitHub Actions 自动触发构建）
+- **部署：** GitHub Pages + 自定义域名（GitHub Actions 自动触发构建）
 - **Agent 运行时：** [OpenClaw](https://openclaw.ai)
 - **AI 模型：** Claude Sonnet（via GitHub Copilot）
 
