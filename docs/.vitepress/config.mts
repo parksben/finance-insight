@@ -10,7 +10,7 @@ function getDailySidebar() {
   const dates = readdirSync(dailyDir)
     .filter(f => f.match(/^\d{8}$/))
     .sort()
-    .reverse() // 最新日期在前
+    .reverse()
 
   return dates.map(date => {
     const yyyy = date.slice(0, 4)
@@ -33,7 +33,7 @@ function getDailySidebar() {
       })
       .map(f => {
         const name = f.replace('.md', '')
-        const titleMap = {
+        const titleMap: Record<string, string> = {
           index: '📋 日报概要',
           research: '🔍 Researcher 情报',
           strategist: '📈 Strategist 信号',
@@ -49,7 +49,7 @@ function getDailySidebar() {
 
     return {
       text: label,
-      collapsed: dates.indexOf(date) > 0, // 只展开最新一天
+      collapsed: dates.indexOf(date) > 0,
       items,
     }
   })
@@ -63,7 +63,18 @@ export default defineConfig({
 
   head: [
     ['meta', { name: 'theme-color', content: '#1a1a2e' }],
+    ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
   ],
+
+  // ECharts 用了 browser API，排除 SSR
+  vite: {
+    ssr: {
+      noExternal: ['echarts', 'zrender'],
+    },
+    optimizeDeps: {
+      include: ['echarts'],
+    },
+  },
 
   themeConfig: {
     logo: '🌊',
@@ -72,10 +83,14 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '每日报告', link: '/daily/' },
+      { text: '📊 模拟盘', link: '/portfolio/' },
     ],
 
     sidebar: {
       '/daily/': getDailySidebar(),
+      '/portfolio/': [
+        { text: '📊 模拟盘实况', link: '/portfolio/' },
+      ],
     },
 
     search: {

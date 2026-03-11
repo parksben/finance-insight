@@ -1,0 +1,16 @@
+{
+  "summary": {
+    "totalAssets": 1000000,
+    "totalReturn": "0.00%",
+    "weekReturn": "0.00%",
+    "maxDrawdown": "0.00%",
+    "winRate": "N/A",
+    "vsCSI300": "N/A",
+    "updatedAt": "2026-03-10"
+  },
+  "positions": [],
+  "history": [
+    { "date": "2026-03-10", "nav": 1.0000, "csi300": 1.0000 }
+  ],
+  "transactions": []
+}
