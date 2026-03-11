@@ -68,6 +68,11 @@ export default defineConfig({
 
   // ECharts 用了 browser API，排除 SSR
   vite: {
+    resolve: {
+      alias: {
+        '@data': new URL('../data', import.meta.url).pathname,
+      },
+    },
     ssr: {
       noExternal: ['echarts', 'zrender'],
     },
