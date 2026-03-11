@@ -129,6 +129,7 @@ MAX_WAIT=300
 ELAPSED=0
 INTERVAL=15
 
+BUILD_OK=0
 while [ $ELAPSED -lt $MAX_WAIT ]; do
   sleep $INTERVAL
   ELAPSED=$((ELAPSED + INTERVAL))
@@ -143,10 +144,8 @@ while [ $ELAPSED -lt $MAX_WAIT ]; do
 
   if [ "$RUN_STATUS" = "completed" ]; then
     if [ "$RUN_CONCLUSION" = "success" ]; then
-      echo ""
-      echo "✅ 构建成功！"
-      echo "PAGE_URL=${PAGES_BASE}/daily/${DATE}/"
-      exit 0
+      BUILD_OK=1
+      break
     else
       echo "❌ 构建失败: $RUN_CONCLUSION"
       exit 2
@@ -154,6 +153,34 @@ while [ $ELAPSED -lt $MAX_WAIT ]; do
   fi
 done
 
-echo "⏰ 超时（${MAX_WAIT}s），构建可能仍在进行中"
+# 构建成功后清理本地已发布的报告文件
+if [ $BUILD_OK -eq 1 ]; then
+  echo ""
+  echo "🧹 清理本地已发布文件..."
+  for role in research strategist riskguard challenger arbiter learn; do
+    src=$(find_report "$role")
+    if [ -n "$src" ] && [ -f "$src" ]; then
+      rm -f "$src"
+      echo "  🗑️  已删除: $src"
+    fi
+  done
+  # 清理周报/月报
+  for f in "$REPORTS_DIR"/weekly-${DATE}.md "$REPORTS_DIR"/monthly-${DATE:0:6}.md; do
+    if [ -f "$f" ]; then
+      rm -f "$f"
+      echo "  🗑️  已删除: $f"
+    fi
+  done
+  # 清理 /tmp 中的发布缓存目录（避免长期占用磁盘）
+  rm -rf "$SITE_REPO_DIR"
+  echo "  🗑️  已清理发布缓存: $SITE_REPO_DIR"
+
+  echo ""
+  echo "✅ 构建成功，本地文件已清理！"
+  echo "PAGE_URL=${PAGES_BASE}/daily/${DATE}/"
+  exit 0
+fi
+
+echo "⏰ 超时（${MAX_WAIT}s），构建可能仍在进行中（本地文件保留）"
 echo "PAGE_URL=${PAGES_BASE}/daily/${DATE}/"
 exit 0
