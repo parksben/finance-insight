@@ -3,13 +3,15 @@
     "totalAssets": 1000000,
     "cash": 900000,
     "positionValue": 100000,
-    "totalReturn": "0.00%",
+    "totalReturn": 0,
     "totalReturnAmt": 0,
     "weekReturn": "0.00%",
     "maxDrawdown": "0.00%",
     "winRate": "N/A",
     "vsCSI300": "N/A",
-    "updatedAt": "2026-03-11"
+    "updatedAt": "2026-03-11",
+    "investedValue": 100000,
+    "totalReturnPct": 0
   },
   "positions": [
     {
@@ -23,15 +25,27 @@
       "pnl": "0",
       "pnlPct": "0.00%",
       "entryDate": "2026-03-11",
-      "weight": 0.10,
+      "weight": 0.1,
       "stopLoss": 10.43,
       "stopLossPct": "-5.00%",
       "logic": "美伊地缘风险持续发酵 + 三方共识避险资产，止损-5%"
     }
   ],
   "history": [
-    { "date": "2026-03-10", "nav": 1.0000, "csi300": 1.0000 },
-    { "date": "2026-03-11", "nav": 1.0000, "csi300": 1.0065 }
+    {
+      "date": "2026-03-10",
+      "nav": 1,
+      "csi300": 1
+    },
+    {
+      "date": "2026-03-11",
+      "nav": 1,
+      "csi300": 1.0065
+    },
+    {
+      "date": "2026-03-12",
+      "nav": 1
+    }
   ],
   "transactions": [
     {
