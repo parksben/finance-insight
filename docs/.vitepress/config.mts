@@ -102,6 +102,10 @@ export default defineConfig({
       provider: 'local',
     },
 
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/parksben/finance-insight' },
+    ],
+
     outline: {
       label: '本页目录',
       level: [2, 3],
