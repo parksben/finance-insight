@@ -108,12 +108,14 @@ const summaryItems = computed(() => [
 ])
 
 function colorClass(val) {
-  if (!val || val === '--' || val === 'N/A') return ''
-  return val.startsWith('-') ? 'text-red' : 'text-green'
+  if (val === null || val === undefined || val === '' || val === '--' || val === 'N/A') return ''
+  const s = String(val)
+  return s.startsWith('-') ? 'text-red' : 'text-green'
 }
 function pnlClass(val) {
-  if (!val) return ''
-  return val.startsWith('-') ? 'text-red' : 'text-green'
+  if (val === null || val === undefined || val === '') return ''
+  const s = String(val)
+  return s.startsWith('-') ? 'text-red' : 'text-green'
 }
 
 onMounted(async () => {
