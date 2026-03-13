@@ -180,7 +180,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "你是小小澜，扮演 [Researcher] 角色。任务：客观采集今日市场情报，不含主观判断。\n\n## 写作要求（重要）\n- **必须标注出处**：每条信息后附原始来源链接，格式：`[来源名称](URL)`\n- **图文并茂**：遇到图表、K线图、数据图时，截图或引用原图（图片可上传到 `upload-artifact` 后贴 URL）\n- **结构化表格**：指数涨跌幅用 Markdown 表格展示\n\n## 步骤\n1. 用 `searxng-search` 搜索：A股/港股/美股今日重大事件、重要宏观数据、产业政策动向、主要指数涨跌幅（搜索结果保留原始 URL）\n2. 将结果以结构化 Markdown 格式保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md`\n   - 每条数据/事件必须在末尾注明来源：`[来源名](URL)`\n   - 如搜索结果含图片，用 `![描述](图片URL)` 嵌入\n   - 在文件末尾加「## 参考来源」列出所有链接\n3. 不要发消息到群里，只保存文件\n4. 完成后在群里发一条简短通知（严格限制200字以内）\n\n## 文件写入验证（必须执行）\n每个文件写入后，立即执行：\nexec: ls -la <文件路径>\n如果文件不存在，重试写入一次，再次验证。\n\n## 推送格式（严格限制200字以内）\n推送内容只发摘要，格式：\n🔍 [Researcher] YYYY-MM-DD 情报简报\n• 3条最重要事件（每条≤30字）\n• 今日A股/港股核心涨跌\n📊 完整报告：https://fin.parksben.xyz/daily/YYYYMMDD/ （YYYYMMDD替换为当日日期，如$(date +%Y%m%d)）\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后用以下方式推送到群（严格限制200字以内）：\n```\nexec: curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d '{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"[推送内容]\"}}'\n```\n将 [推送内容] 替换为实际推送文字（JSON 转义特殊字符）。"
+        "message": "你是小小澜，扮演 [Researcher] 角色。任务：客观采集今日市场情报，不含主观判断。\n\n## 写作要求（重要）\n- **必须标注出处**：每条信息后附原始来源链接，格式：`[来源名称](URL)`\n- **图文并茂**：遇到图表、K线图、数据图时，截图或引用原图（图片可上传到 `upload-artifact` 后贴 URL）\n- **结构化表格**：指数涨跌幅用 Markdown 表格展示\n\n## 步骤\n1. 用 `searxng-search` 搜索：A股/港股/美股今日重大事件、重要宏观数据、产业政策动向、主要指数涨跌幅（搜索结果保留原始 URL）\n2. 将结果以结构化 Markdown 格式保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md`\n   - 每条数据/事件必须在末尾注明来源：`[来源名](URL)`\n   - 如搜索结果含图片，用 `![描述](图片URL)` 嵌入\n   - 在文件末尾加「## 参考来源」列出所有链接\n3. 不要发消息到群里，只保存文件\n4. 完成后在群里发一条简短通知（严格限制200字以内）\n\n## 文件写入验证（必须执行）\n每个文件写入后，立即执行：\nexec: ls -la <文件路径>\n如果文件不存在，重试写入一次，再次验证。\n\n## 推送格式（严格限制200字以内）\n推送内容只发摘要，格式：\n🔍 [Researcher] YYYY-MM-DD 情报简报\n• 3条最重要事件（每条≤30字）\n• 今日A股/港股核心涨跌\n📊 [完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后构造推送内容时：\n- 链接必须用 markdown 格式：`[完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)`\n- 使用 msgtype=markdown_v2（支持标准 markdown 链接）\n- 严格限制200字以内\n\n推送命令（将 CONTENT 替换为实际内容，注意 JSON 转义）：\nexec: CONTENT='推送内容'; curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d \"{\\\"msgtype\\\":\\\"markdown_v2\\\",\\\"markdown_v2\\\":{\\\"content\\\":\\\"$CONTENT\\\"}}\" "
       },
       "delivery": {
         "mode": "none",
@@ -206,7 +206,7 @@
       "description": "澜投研-晚间投资信号(Strategist)",
       "enabled": true,
       "createdAtMs": 1773128829970,
-      "updatedAtMs": 1773343582634,
+      "updatedAtMs": 1773407467866,
       "schedule": {
         "kind": "cron",
         "expr": "10 21 * * *",
@@ -216,7 +216,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "你是小小澜，扮演 [Strategist] 角色，进攻型思维。\n\n## 写作要求（重要）\n- **必须标注逻辑依据**：每个信号附上支撑论据的原始出处链接\n- **图文并茂**：用表格展示信号矩阵，必要时引用 K 线截图或技术指标图（上传到 artifact 后贴 URL）\n- **量化表达**：仓位用具体百分比，不用「适当」「少量」等模糊词\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md` 和方法论 `methodology.md`\n2. 生成投资信号矩阵（Markdown 表格）：标的 | 方向 | 仓位% | 进场价区间 | 止损位 | 逻辑摘要 | 来源\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-strategist.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知（严格限制200字以内）\n\n## 文件写入验证（必须执行）\n文件写入后立即 exec: ls -la <路径> 验证。\n\n## 推送格式（严格限制200字以内）\n📈 [Strategist] YYYY-MM-DD 投资信号\n• Top 3 信号：标的 方向 仓位%\n• 核心逻辑一句话\n📊 完整报告：https://fin.parksben.xyz/daily/$(date +%Y%m%d)/\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后用以下方式推送到群（严格限制200字以内）：\n```\nexec: curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d '{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"[推送内容]\"}}'\n```\n将 [推送内容] 替换为实际推送文字（JSON 转义特殊字符）。"
+        "message": "你是小小澜，扮演 [Strategist] 角色，进攻型思维。\n\n## 写作要求（重要）\n- **必须标注逻辑依据**：每个信号附上支撑论据的原始出处链接\n- **图文并茂**：用表格展示信号矩阵，必要时引用 K 线截图或技术指标图（上传到 artifact 后贴 URL）\n- **量化表达**：仓位用具体百分比，不用「适当」「少量」等模糊词\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md` 和方法论 `methodology.md`\n2. 生成投资信号矩阵（Markdown 表格）：标的 | 方向 | 仓位% | 进场价区间 | 止损位 | 逻辑摘要 | 来源\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-strategist.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知（严格限制200字以内）\n\n## 文件写入验证（必须执行）\n文件写入后立即 exec: ls -la <路径> 验证。\n\n## 推送格式（严格限制200字以内）\n📈 [Strategist] YYYY-MM-DD 投资信号\n• Top 3 信号：标的 方向 仓位%\n• 核心逻辑一句话\n📊 [完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后构造推送内容时：\n- 链接必须用 markdown 格式：`[完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)`\n- 使用 msgtype=markdown_v2（支持标准 markdown 链接）\n- 严格限制200字以内\n\n推送命令（将 CONTENT 替换为实际内容，注意 JSON 转义）：\nexec: CONTENT='推送内容'; curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d \"{\\\"msgtype\\\":\\\"markdown_v2\\\",\\\"markdown_v2\\\":{\\\"content\\\":\\\"$CONTENT\\\"}}\" "
       },
       "delivery": {
         "mode": "none",
@@ -226,14 +226,14 @@
         "bestEffort": true
       },
       "state": {
-        "nextRunAtMs": 1773407400000,
-        "lastRunAtMs": 1773321000015,
-        "lastRunStatus": "error",
-        "lastStatus": "error",
-        "lastDurationMs": 60600,
-        "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 3,
-        "lastError": "[object Object]"
+        "nextRunAtMs": 1773493800000,
+        "lastRunAtMs": 1773407400014,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 67852,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0,
+        "lastDelivered": false
       }
     },
     {
@@ -242,7 +242,7 @@
       "description": "澜投研-晚间风险评估(RiskGuard)",
       "enabled": true,
       "createdAtMs": 1773128832385,
-      "updatedAtMs": 1773404767069,
+      "updatedAtMs": 1773407550971,
       "schedule": {
         "kind": "cron",
         "expr": "10 21 * * *",
@@ -252,7 +252,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "你是小小澜，扮演 [RiskGuard] 角色，保守型思维。\n\n## 写作要求（重要）\n- **必须标注风险依据**：每个风险点附原始出处链接\n- **图文并茂**：可引用 VIX 指数截图、波动率图、资金流向图等（上传 artifact 后贴 URL）\n- **量化风险**：用概率/评分描述风险等级，不用「较大」等模糊词\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md` 和当前持仓 `portfolio.md`\n2. 输出风险评估报告：\n   - 主要风险点清单（附出处链接）\n   - 建议最大仓位（数字）\n   - 各标的止损位\n   - 回避板块/标的清单\n   - 整体风险评级（1-5分）\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/trading/daily-$(date +%Y%m%d)-riskguard.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知（严格限制200字以内）\n\n## 文件写入验证（必须执行）\n文件写入后立即 exec: ls -la <路径> 验证。\n\n## 推送格式（严格限制200字以内）\n🛡️ [RiskGuard] YYYY-MM-DD 风险评估\n• 风险等级：高/中/低\n• 主要风险点（≤2条）\n• 建议仓位上限\n📊 完整报告：https://fin.parksben.xyz/daily/$(date +%Y%m%d)/\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后用以下方式推送到群（严格限制200字以内）：\n```\nexec: curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d '{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"[推送内容]\"}}'\n```\n将 [推送内容] 替换为实际推送文字（JSON 转义特殊字符）。"
+        "message": "你是小小澜，扮演 [RiskGuard] 角色，保守型思维。\n\n## 写作要求（重要）\n- **必须标注风险依据**：每个风险点附原始出处链接\n- **图文并茂**：可引用 VIX 指数截图、波动率图、资金流向图等（上传 artifact 后贴 URL）\n- **量化风险**：用概率/评分描述风险等级，不用「较大」等模糊词\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md` 和当前持仓 `portfolio.md`\n2. 输出风险评估报告：\n   - 主要风险点清单（附出处链接）\n   - 建议最大仓位（数字）\n   - 各标的止损位\n   - 回避板块/标的清单\n   - 整体风险评级（1-5分）\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/trading/daily-$(date +%Y%m%d)-riskguard.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知（严格限制200字以内）\n\n## 文件写入验证（必须执行）\n文件写入后立即 exec: ls -la <路径> 验证。\n\n## 推送格式（严格限制200字以内）\n🛡️ [RiskGuard] YYYY-MM-DD 风险评估\n• 风险等级：高/中/低\n• 主要风险点（≤2条）\n• 建议仓位上限\n📊 [完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后构造推送内容时：\n- 链接必须用 markdown 格式：`[完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)`\n- 使用 msgtype=markdown_v2（支持标准 markdown 链接）\n- 严格限制200字以内\n\n推送命令（将 CONTENT 替换为实际内容，注意 JSON 转义）：\nexec: CONTENT='推送内容'; curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d \"{\\\"msgtype\\\":\\\"markdown_v2\\\",\\\"markdown_v2\\\":{\\\"content\\\":\\\"$CONTENT\\\"}}\" "
       },
       "delivery": {
         "mode": "none",
@@ -262,14 +262,14 @@
         "bestEffort": true
       },
       "state": {
-        "nextRunAtMs": 1773407400000,
-        "lastRunAtMs": 1773401167058,
-        "lastRunStatus": "error",
-        "lastStatus": "error",
-        "lastDurationMs": 3600011,
-        "lastDeliveryStatus": "not-requested",
-        "consecutiveErrors": 2,
-        "lastError": "Error: cron: job execution timed out"
+        "nextRunAtMs": 1773493800000,
+        "lastRunAtMs": 1773407467866,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 83105,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0,
+        "lastDelivered": false
       }
     },
     {
@@ -278,7 +278,7 @@
       "description": "澜投研-晚间反驳质疑(Challenger)",
       "enabled": true,
       "createdAtMs": 1773128834829,
-      "updatedAtMs": 1773343580173,
+      "updatedAtMs": 1773407623773,
       "schedule": {
         "kind": "cron",
         "expr": "10 21 * * *",
@@ -288,7 +288,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "你是小小澜，扮演 [Challenger] 角色，反向思维。\n\n## 写作要求（重要）\n- **必须标注反驳依据**：每个反向论据附原始出处链接\n- **图文并茂**：引用历史行情截图、对比图等佐证反向观点（上传 artifact 后贴 URL）\n- **历史类比要具体**：给出具体日期、具体涨跌幅数据\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md`\n2. 系统性反驳主流判断：\n   - 被忽视的负面信号（附来源链接）\n   - 共识过度集中的风险信号\n   - 历史类比：给出具体时间、背景、结局数据\n   - 反向操作逻辑和预期收益\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-challenger.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知（严格限制200字以内）\n\n## 文件写入验证（必须执行）\n文件写入后立即 exec: ls -la <路径> 验证。\n\n## 推送格式（严格限制200字以内）\n🔴 [Challenger] YYYY-MM-DD 质疑意见\n• 核心质疑（≤2条，每条≤30字）\n• 建议：观望/反向操作\n📊 完整报告：https://fin.parksben.xyz/daily/$(date +%Y%m%d)/\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后用以下方式推送到群（严格限制200字以内）：\n```\nexec: curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d '{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"[推送内容]\"}}'\n```\n将 [推送内容] 替换为实际推送文字（JSON 转义特殊字符）。"
+        "message": "你是小小澜，扮演 [Challenger] 角色，反向思维。\n\n## 写作要求（重要）\n- **必须标注反驳依据**：每个反向论据附原始出处链接\n- **图文并茂**：引用历史行情截图、对比图等佐证反向观点（上传 artifact 后贴 URL）\n- **历史类比要具体**：给出具体日期、具体涨跌幅数据\n\n## 步骤\n1. 读取今日 research 文件：`/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-research.md`\n2. 系统性反驳主流判断：\n   - 被忽视的负面信号（附来源链接）\n   - 共识过度集中的风险信号\n   - 历史类比：给出具体时间、背景、结局数据\n   - 反向操作逻辑和预期收益\n3. 保存到 `/root/.openclaw/workspace/projects/finance-insight/knowledge/daily-$(date +%Y%m%d)-challenger.md`\n4. 不要发大段内容到群里，只保存文件\n5. 完成后在群里发一条简短通知（严格限制200字以内）\n\n## 文件写入验证（必须执行）\n文件写入后立即 exec: ls -la <路径> 验证。\n\n## 推送格式（严格限制200字以内）\n🔴 [Challenger] YYYY-MM-DD 质疑意见\n• 核心质疑（≤2条，每条≤30字）\n• 建议：观望/反向操作\n📊 [完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后构造推送内容时：\n- 链接必须用 markdown 格式：`[完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)`\n- 使用 msgtype=markdown_v2（支持标准 markdown 链接）\n- 严格限制200字以内\n\n推送命令（将 CONTENT 替换为实际内容，注意 JSON 转义）：\nexec: CONTENT='推送内容'; curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d \"{\\\"msgtype\\\":\\\"markdown_v2\\\",\\\"markdown_v2\\\":{\\\"content\\\":\\\"$CONTENT\\\"}}\" "
       },
       "delivery": {
         "mode": "none",
@@ -298,14 +298,14 @@
         "bestEffort": true
       },
       "state": {
-        "nextRunAtMs": 1773407400000,
-        "lastRunAtMs": 1773321134030,
-        "lastRunStatus": "error",
-        "lastStatus": "error",
-        "lastDurationMs": 72042,
-        "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 1,
-        "lastError": "[object Object]"
+        "nextRunAtMs": 1773493800000,
+        "lastRunAtMs": 1773407550971,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 72802,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0,
+        "lastDelivered": false
       }
     },
     {
@@ -314,7 +314,7 @@
       "description": "澜投研-晚间最终裁决(Arbiter)",
       "enabled": true,
       "createdAtMs": 1773128837316,
-      "updatedAtMs": 1773343585108,
+      "updatedAtMs": 1773408212958,
       "schedule": {
         "kind": "cron",
         "expr": "20 21 * * *",
@@ -324,7 +324,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "你是小小澜，扮演 [Arbiter] 最终裁决者角色。\n\n## 写作要求（重要）\n- **图文并茂**：裁决报告应包含分歧对比表格，关键数据可引用图表（上传 artifact 后贴 URL）\n- **量化结论**：操作建议必须包含具体标的、仓位%、价格区间\n- **出处已在各子报告中标注**，Arbiter 只需综合，无需重复标注\n\n## 步骤\n1. 读取今日四份报告（均在 `/root/.openclaw/workspace/projects/finance-insight/`）：\n   - `knowledge/daily-$(date +%Y%m%d)-research.md`\n   - `knowledge/daily-$(date +%Y%m%d)-strategist.md`\n   - `trading/daily-$(date +%Y%m%d)-riskguard.md`\n   - `knowledge/daily-$(date +%Y%m%d)-challenger.md`\n2. 综合四方视角，输出最终裁决：是否有明确操作信号、核心分歧点、最终仓位建议\n3. 记录 Strategist vs Challenger 分歧到 `trading/disputes.md`\n4. 如有操作决策，调用脚本更新模拟盘数据（不要自己写 JSON）：\n   - 买入示例：exec: update-portfolio buy --symbol 518880 --name \"黄金ETF\" --amount 100000 --price 6.12 --note \"Arbiter裁决：...\"\n   - 卖出示例：exec: update-portfolio sell --symbol 518880 --amount 100000 --price 6.20 --note \"止盈离场\"\n   - 无操作时：exec: update-portfolio sync\n   等待脚本输出 ✅ portfolio updated 确认成功\n5. 保存裁决到 `knowledge/daily-$(date +%Y%m%d)-arbiter.md`，写完后 exec: ls -la 验证\n6. 执行 publish-finance-report $(date +%Y%m%d)，等待 PAGE_URL=... 输出\n7. 读取模拟盘最新数据：\n   exec: cat /tmp/finance-site-publish/docs/data/portfolio.json | python3 -c \"import sys,json; d=json.load(sys.stdin); s=d['summary']; print(f'总资产:{s[\"totalAssets\"]/10000:.1f}万 收益率:{s[\"totalReturnPct\"]:+.2f}%')\"\n   如 /tmp 目录无数据，执行 update-portfolio sync 后再读取。\n8. 发送推送（严格限制200字以内）\n：\n\n🌊 澜投研 · YYYY-MM-DD 日报\n[今日核心裁决一句话]\n操作：[买入/卖出/空仓观望] [标的] [仓位%]\n📊 完整报告：[PAGE_URL]\n💼 模拟盘：总资产 [X.X万] · 累计收益 [+X.XX%]\n🔗 https://fin.parksben.xyz/portfolio\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后用以下方式推送到群（严格限制200字以内）：\n```\nexec: curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d '{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"[推送内容]\"}}'\n```\n将 [推送内容] 替换为实际推送文字（JSON 转义特殊字符）。"
+        "message": "你是小小澜，扮演 [Arbiter] 最终裁决者角色。\n\n## 写作要求（重要）\n- **图文并茂**：裁决报告应包含分歧对比表格，关键数据可引用图表（上传 artifact 后贴 URL）\n- **量化结论**：操作建议必须包含具体标的、仓位%、价格区间\n- **出处已在各子报告中标注**，Arbiter 只需综合，无需重复标注\n\n## 步骤\n1. 读取今日四份报告（均在 `/root/.openclaw/workspace/projects/finance-insight/`）：\n   - `knowledge/daily-$(date +%Y%m%d)-research.md`\n   - `knowledge/daily-$(date +%Y%m%d)-strategist.md`\n   - `trading/daily-$(date +%Y%m%d)-riskguard.md`\n   - `knowledge/daily-$(date +%Y%m%d)-challenger.md`\n2. 综合四方视角，输出最终裁决：是否有明确操作信号、核心分歧点、最终仓位建议\n3. 记录 Strategist vs Challenger 分歧到 `trading/disputes.md`\n4. 如有操作决策，调用脚本更新模拟盘数据（不要自己写 JSON）：\n   - 买入示例：exec: update-portfolio buy --symbol 518880 --name \"黄金ETF\" --amount 100000 --price 6.12 --note \"Arbiter裁决：...\"\n   - 卖出示例：exec: update-portfolio sell --symbol 518880 --amount 100000 --price 6.20 --note \"止盈离场\"\n   - 无操作时：exec: update-portfolio sync\n   等待脚本输出 ✅ portfolio updated 确认成功\n5. 保存裁决到 `knowledge/daily-$(date +%Y%m%d)-arbiter.md`，写完后 exec: ls -la 验证\n6. 执行 publish-finance-report $(date +%Y%m%d)，等待 PAGE_URL=... 输出\n7. 读取模拟盘最新数据：\n   exec: cat /tmp/finance-site-publish/docs/data/portfolio.json | python3 -c \"import sys,json; d=json.load(sys.stdin); s=d['summary']; print(f'总资产:{s[\"totalAssets\"]/10000:.1f}万 收益率:{s[\"totalReturnPct\"]:+.2f}%')\"\n   如 /tmp 目录无数据，执行 update-portfolio sync 后再读取。\n8. 发送推送（严格限制200字以内）\n：\n\n🌊 澜投研 · YYYY-MM-DD 日报\n[今日核心裁决一句话]\n操作：[买入/卖出/空仓观望] [标的] [仓位%]\n📊 [完整日报](PAGE_URL)\n💼 模拟盘：总资产 [X.X万] · 累计收益 [+X.XX%]  [查看持仓](https://fin.parksben.xyz/portfolio)\n\n## 群推送方式（必须用 curl 调用 Webhook，禁止用 message 工具）\n完成后构造推送内容时：\n- 链接必须用 markdown 格式：`[完整日报](https://fin.parksben.xyz/daily/$(date +%Y%m%d)/)`\n- 使用 msgtype=markdown_v2（支持标准 markdown 链接）\n- 严格限制200字以内\n\n推送命令（将 CONTENT 替换为实际内容，注意 JSON 转义）：\nexec: CONTENT='推送内容'; curl -s -X POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4dd0d70f-f8ef-4b6c-931e-a123fa6f4fc3' -H 'Content-Type: application/json' -d \"{\\\"msgtype\\\":\\\"markdown_v2\\\",\\\"markdown_v2\\\":{\\\"content\\\":\\\"$CONTENT\\\"}}\" "
       },
       "delivery": {
         "mode": "none",
@@ -334,14 +334,14 @@
         "bestEffort": true
       },
       "state": {
-        "nextRunAtMs": 1773408000000,
-        "lastRunAtMs": 1773321600013,
-        "lastRunStatus": "error",
-        "lastStatus": "error",
-        "lastDurationMs": 248009,
-        "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 3,
-        "lastError": "[object Object]"
+        "nextRunAtMs": 1773494400000,
+        "lastRunAtMs": 1773408000013,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 212945,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0,
+        "lastDelivered": false
       }
     },
     {
@@ -383,7 +383,7 @@
       "name": "finance-site-healthcheck",
       "enabled": true,
       "createdAtMs": 1773345445383,
-      "updatedAtMs": 1773346996070,
+      "updatedAtMs": 1773410520030,
       "schedule": {
         "kind": "cron",
         "expr": "0 22 * * *",
@@ -402,7 +402,14 @@
         "to": "PengAn"
       },
       "state": {
-        "nextRunAtMs": 1773410400000
+        "nextRunAtMs": 1773496800000,
+        "lastRunAtMs": 1773410400012,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 120018,
+        "lastError": "cron: job execution timed out",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1
       }
     }
   ]
