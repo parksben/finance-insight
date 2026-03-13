@@ -3,15 +3,15 @@
     "totalAssets": 999671,
     "cash": 900000,
     "positionValue": 99671,
-    "totalReturn": -0.0003,
+    "totalReturn": -329,
     "totalReturnAmt": -329,
     "weekReturn": "-0.03%",
     "maxDrawdown": "-0.03%",
     "winRate": "N/A",
     "vsCSI300": "N/A",
     "updatedAt": "2026-03-12",
-    "investedValue": 100000,
-    "totalReturnPct": -0.03
+    "investedValue": 99671,
+    "totalReturnPct": -0.0329
   },
   "positions": [
     {
@@ -45,7 +45,11 @@
     {
       "date": "2026-03-12",
       "nav": 0.9997,
-      "csi300": 1.0
+      "csi300": 1
+    },
+    {
+      "date": "2026-03-13",
+      "nav": 0.999671
     }
   ],
   "transactions": [
