@@ -1,77 +1,56 @@
 {
   "summary": {
-    "totalAssets": 999671,
-    "cash": 900000,
-    "positionValue": 99671,
-    "totalReturn": -329,
-    "totalReturnAmt": -329,
-    "weekReturn": "-0.03%",
-    "maxDrawdown": "-0.03%",
-    "winRate": "N/A",
-    "vsCSI300": "N/A",
-    "updatedAt": "2026-03-12",
-    "investedValue": 99671,
-    "totalReturnPct": -0.0329
+    "initialCapital": 1000000,
+    "totalAssets": 998449,
+    "cumulativeReturn": -0.1551,
+    "weeklyReturn": -1.55,
+    "maxDrawdown": -0.155,
+    "winRate": 0,
+    "vsCSI300": "本周沪深300约持平/微跌，黄金ETF跑输"
   },
   "positions": [
     {
-      "symbol": "518880",
-      "name": "黄金ETF（华安）",
+      "name": "黄金ETF（518880）",
       "direction": "多",
+      "weight": 9.86,
       "cost": 10.974,
-      "price": 10.938,
-      "quantity": 9113,
-      "currentValue": 99671,
-      "pnl": "-329",
-      "pnlPct": "-0.33%",
-      "entryDate": "2026-03-11",
-      "weight": 0.1,
-      "stopLoss": 10.67,
-      "stopLossPct": "-2.80%",
-      "logic": "美伊地缘风险持续发酵 + 三方共识避险资产；Arbiter 3.12裁决止损上移至10.67（-2.80%）"
+      "price": 10.802,
+      "pnl": -1.57,
+      "shares": 9113
     }
   ],
   "history": [
-    {
-      "date": "2026-03-10",
-      "nav": 1,
-      "csi300": 1
-    },
-    {
-      "date": "2026-03-11",
-      "nav": 1,
-      "csi300": 1.0065
-    },
-    {
-      "date": "2026-03-12",
-      "nav": 0.9997,
-      "csi300": 1
-    },
-    {
-      "date": "2026-03-13",
-      "nav": 0.999671
-    }
+    { "date": "2026-03-10", "nav": 1.0000, "csi300": 1.0000 },
+    { "date": "2026-03-11", "nav": 1.0000, "csi300": 1.0000 },
+    { "date": "2026-03-12", "nav": 0.9997, "csi300": 1.0000 },
+    { "date": "2026-03-13", "nav": 0.9984, "csi300": 0.9980 }
   ],
   "transactions": [
     {
       "date": "2026-03-10",
-      "asset": "-",
       "action": "开户",
-      "shares": null,
+      "symbol": "-",
       "price": null,
-      "amount": 1000000,
-      "cash": 1000000,
-      "reason": "初始化模拟账户，100万模拟本金"
+      "shares": null,
+      "amount": 1000000
     },
     {
       "date": "2026-03-11",
-      "asset": "518880 黄金ETF",
       "action": "买入",
-      "shares": 9113,
+      "symbol": "518880",
       "price": 10.974,
-      "amount": -100000,
-      "cash": 900000,
-      "reason": "Arbiter裁决：三方共识避险资产；美伊地缘风险+黄金5000整理；仓位10%，止损-5%（10.43）"
+      "shares": 9113,
+      "amount": -100000
+    },
+    {
+      "date": "2026-03-12",
+      "action": "调整止损",
+      "symbol": "518880",
+      "price": null,
+      "shares": null,
+      "amount": 0,
+      "note": "止损上移至10.67"
     }
-  ]
+  ],
+  "updatedAt": "2026-03-14"
 }
