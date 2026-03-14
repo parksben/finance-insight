@@ -1,15 +1,15 @@
 {
   "summary": {
     "initialCapital": 1000000,
-    "totalAssets": 0,
+    "totalAssets": 998449,
     "cumulativeReturn": -0.1551,
     "weeklyReturn": -1.55,
-    "maxDrawdown": -0.155,
+    "maxDrawdown": -0.1551,
     "winRate": 0,
     "vsCSI300": "本周沪深300约持平/微跌，黄金ETF跑输",
-    "investedValue": 0,
-    "totalReturn": -1000000,
-    "totalReturnPct": -100
+    "investedValue": 98449,
+    "totalReturn": -1551,
+    "totalReturnPct": -0.1551
   },
   "positions": [
     {
@@ -22,31 +22,19 @@
       "shares": 9113
     }
   ],
+  "navHistory": [
+    { "date": "2026-03-10", "nav": 1.0000, "totalAssets": 1000000 },
+    { "date": "2026-03-11", "nav": 1.0000, "totalAssets": 1000000 },
+    { "date": "2026-03-12", "nav": 0.9997, "totalAssets": 999671 },
+    { "date": "2026-03-13", "nav": 0.9984, "totalAssets": 998449 },
+    { "date": "2026-03-14", "nav": 0.9984, "totalAssets": 998449 }
+  ],
   "history": [
-    {
-      "date": "2026-03-10",
-      "nav": 1,
-      "csi300": 1
-    },
-    {
-      "date": "2026-03-11",
-      "nav": 1,
-      "csi300": 1
-    },
-    {
-      "date": "2026-03-12",
-      "nav": 0.9997,
-      "csi300": 1
-    },
-    {
-      "date": "2026-03-13",
-      "nav": 0.9984,
-      "csi300": 0.998
-    },
-    {
-      "date": "2026-03-14",
-      "nav": 0
-    }
+    { "date": "2026-03-10", "nav": 1, "csi300": 1 },
+    { "date": "2026-03-11", "nav": 1, "csi300": 1 },
+    { "date": "2026-03-12", "nav": 0.9997, "csi300": 1 },
+    { "date": "2026-03-13", "nav": 0.9984, "csi300": 0.998 },
+    { "date": "2026-03-14", "nav": 0.9984, "csi300": 0.998 }
   ],
   "transactions": [
     {
