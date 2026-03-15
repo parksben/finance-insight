@@ -61,5 +61,5 @@ niuma 产品全栈巡检。执行以下检查：
 
 ```bash
 openclaw cron rm d92003da-6e8a-4c6c-a69b-b0a08219754a
-openclaw cron add --cron "*/30 * * * *" --prompt "<上述完整prompt>" --id niuma-patrol
+openclaw cron add --cron "0 */6 * * *" --prompt "<上述完整prompt>" --id niuma-patrol
 ```
