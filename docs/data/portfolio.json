@@ -1,15 +1,15 @@
 {
   "summary": {
     "initialCapital": 1000000,
-    "totalAssets": 0,
+    "totalAssets": 998449,
     "cumulativeReturn": -0.1551,
-    "weeklyReturn": -1.55,
+    "weeklyReturn": -0.16,
     "maxDrawdown": -0.1551,
     "winRate": 0,
     "vsCSI300": "本周沪深300约持平/微跌，黄金ETF跑输",
-    "investedValue": 0,
-    "totalReturn": -1000000,
-    "totalReturnPct": -100
+    "investedValue": 98449,
+    "totalReturn": -1551,
+    "totalReturnPct": -0.16
   },
   "positions": [
     {
@@ -47,6 +47,11 @@
       "date": "2026-03-14",
       "nav": 0.9984,
       "totalAssets": 998449
+    },
+    {
+      "date": "2026-03-15",
+      "nav": 0.9984,
+      "totalAssets": 998449
     }
   ],
   "history": [
@@ -77,7 +82,8 @@
     },
     {
       "date": "2026-03-15",
-      "nav": 0
+      "nav": 0.9984,
+      "csi300": 0.998
     }
   ],
   "transactions": [
@@ -107,5 +113,5 @@
       "note": "止损上移至10.67"
     }
   ],
-  "updatedAt": "2026-03-14"
+  "updatedAt": "2026-03-15"
 }
