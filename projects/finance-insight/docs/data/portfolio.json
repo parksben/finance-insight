@@ -1,0 +1,56 @@
+{
+  "summary": {
+    "initialCapital": 1000000,
+    "totalAssets": 998449,
+    "cumulativeReturn": -0.1551,
+    "weeklyReturn": -1.55,
+    "maxDrawdown": -0.155,
+    "winRate": 0,
+    "vsCSI300": "本周沪深300约持平/微跌，黄金ETF跑输"
+  },
+  "positions": [
+    {
+      "name": "黄金ETF（518880）",
+      "direction": "多",
+      "weight": 9.86,
+      "cost": 10.974,
+      "price": 10.802,
+      "pnl": -1.57,
+      "shares": 9113
+    }
+  ],
+  "history": [
+    { "date": "2026-03-10", "nav": 1.0000, "csi300": 1.0000 },
+    { "date": "2026-03-11", "nav": 1.0000, "csi300": 1.0000 },
+    { "date": "2026-03-12", "nav": 0.9997, "csi300": 1.0000 },
+    { "date": "2026-03-13", "nav": 0.9984, "csi300": 0.9980 }
+  ],
+  "transactions": [
+    {
+      "date": "2026-03-10",
+      "action": "开户",
+      "symbol": "-",
+      "price": null,
+      "shares": null,
+      "amount": 1000000
+    },
+    {
+      "date": "2026-03-11",
+      "action": "买入",
+      "symbol": "518880",
+      "price": 10.974,
+      "shares": 9113,
+      "amount": -100000
+    },
+    {
+      "date": "2026-03-12",
+      "action": "调整止损",
+      "symbol": "518880",
+      "price": null,
+      "shares": null,
+      "amount": 0,
+      "note": "止损上移至10.67"
+    }
+  ],
+  "updatedAt": "2026-03-14"
+}

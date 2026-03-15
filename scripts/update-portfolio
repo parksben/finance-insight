@@ -1,0 +1,269 @@
+#!/usr/bin/env node
+/**
+ * update-portfolio — 更新模拟盘 portfolio.json
+ * 用法：
+ *   update-portfolio buy   --symbol 518880 --name "黄金ETF" --amount 100000 --price 6.123 --note "..."
+ *   update-portfolio sell  --symbol 518880 --amount 100000 --price 6.200 --note "..."
+ *   update-portfolio price --symbol 518880 --price 6.200   （更新现价，重算盈亏）
+ *   update-portfolio sync  （仅同步 portfolio.md → portfolio.json，不做交易）
+ */
+
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+const REPO_DIR = '/tmp/finance-site-publish';
+const REPO_URL = 'https://github.com/parksben/finance-insight.git';
+const PORTFOLIO_JSON = path.join(REPO_DIR, 'docs/data/portfolio.json');
+
+function ensureRepo() {
+  if (!fs.existsSync(REPO_DIR)) {
+    console.log('🔄 Cloning repo...');
+    execSync(`git clone ${REPO_URL} ${REPO_DIR}`, { stdio: 'inherit' });
+  } else {
+    console.log('🔄 Pulling latest...');
+    execSync('git pull origin main', { cwd: REPO_DIR, stdio: 'inherit' });
+  }
+}
+
+function loadPortfolio() {
+  if (!fs.existsSync(PORTFOLIO_JSON)) {
+    // Return default structure
+    return {
+      summary: {
+        totalAssets: 1000000,
+        cash: 1000000,
+        investedValue: 0,
+        totalReturn: 0,
+        totalReturnPct: 0,
+        weekReturn: 0,
+        weekReturnPct: 0,
+        maxDrawdown: 0,
+        winRate: 0,
+        vsCsi300: 0
+      },
+      positions: [],
+      transactions: [],
+      history: []
+    };
+  }
+  return JSON.parse(fs.readFileSync(PORTFOLIO_JSON, 'utf8'));
+}
+
+function savePortfolio(data) {
+  fs.mkdirSync(path.dirname(PORTFOLIO_JSON), { recursive: true });
+  fs.writeFileSync(PORTFOLIO_JSON, JSON.stringify(data, null, 2), 'utf8');
+}
+
+function today() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function appendHistory(data) {
+  const nav = data.summary.totalAssets / 1000000;
+  const date = today();
+  // Remove existing entry for today if any
+  data.history = data.history.filter(h => h.date !== date);
+  data.history.push({ date, nav });
+  // Keep last 365 days
+  data.history = data.history.slice(-365);
+}
+
+function recalcSummary(data) {
+  const investedValue = data.positions.reduce((sum, p) => sum + (p.currentValue || 0), 0);
+  data.summary.investedValue = investedValue;
+  data.summary.totalAssets = (data.summary.cash || 0) + investedValue;
+  const totalReturn = data.summary.totalAssets - 1000000;
+  data.summary.totalReturn = totalReturn;
+  data.summary.totalReturnPct = parseFloat(((totalReturn / 1000000) * 100).toFixed(4));
+}
+
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const cmd = args[0];
+  const opts = {};
+  for (let i = 1; i < args.length; i++) {
+    if (args[i].startsWith('--')) {
+      const key = args[i].slice(2);
+      const val = args[i + 1] && !args[i + 1].startsWith('--') ? args[++i] : true;
+      opts[key] = val;
+    }
+  }
+  return { cmd, opts };
+}
+
+function gitCommitAndPush(message) {
+  execSync(`git add docs/data/portfolio.json`, { cwd: REPO_DIR, stdio: 'inherit' });
+  execSync(`git commit -m "${message}"`, { cwd: REPO_DIR, stdio: 'inherit' });
+  execSync(`git push origin main`, { cwd: REPO_DIR, stdio: 'inherit' });
+}
+
+async function main() {
+  const { cmd, opts } = parseArgs();
+
+  if (!cmd) {
+    console.error('Usage: update-portfolio <buy|sell|price|sync> [options]');
+    process.exit(1);
+  }
+
+  ensureRepo();
+  const data = loadPortfolio();
+
+  if (cmd === 'buy') {
+    const { symbol, name, amount, price, note } = opts;
+    if (!symbol || !amount || !price) {
+      console.error('buy requires --symbol, --amount, --price');
+      process.exit(1);
+    }
+    const amountNum = parseFloat(amount);
+    const priceNum = parseFloat(price);
+    const shares = amountNum / priceNum;
+    const cost = amountNum;
+
+    // Update or add position
+    let pos = data.positions.find(p => p.symbol === symbol);
+    if (pos) {
+      const totalCost = pos.cost * pos.shares + cost;
+      pos.shares += shares;
+      pos.cost = totalCost / pos.shares;
+      pos.currentPrice = priceNum;
+      pos.currentValue = pos.shares * priceNum;
+      pos.pnl = pos.currentValue - pos.shares * pos.cost;
+      pos.pnlPct = parseFloat(((pos.pnl / (pos.shares * pos.cost)) * 100).toFixed(4));
+    } else {
+      data.positions.push({
+        symbol,
+        name: name || symbol,
+        direction: 'long',
+        shares: parseFloat(shares.toFixed(4)),
+        cost: priceNum,
+        currentPrice: priceNum,
+        currentValue: cost,
+        pnl: 0,
+        pnlPct: 0,
+        weight: 0
+      });
+    }
+
+    // Deduct cash
+    data.summary.cash = (data.summary.cash || 0) - cost;
+
+    // Record transaction
+    data.transactions.push({
+      date: today(),
+      asset: name || symbol,
+      action: '买入',
+      shares: parseFloat(shares.toFixed(4)),
+      price: priceNum,
+      amount: -cost,
+      reason: note || ''
+    });
+
+    recalcSummary(data);
+
+    // Update weights
+    data.positions.forEach(p => {
+      p.weight = parseFloat(((p.currentValue / data.summary.totalAssets) * 100).toFixed(2));
+    });
+
+    appendHistory(data);
+    savePortfolio(data);
+    gitCommitAndPush(`buy ${symbol} ${shares.toFixed(2)}股 @${priceNum}`);
+    console.log('✅ portfolio updated');
+
+  } else if (cmd === 'sell') {
+    const { symbol, amount, price, note } = opts;
+    if (!symbol || !amount || !price) {
+      console.error('sell requires --symbol, --amount, --price');
+      process.exit(1);
+    }
+    const amountNum = parseFloat(amount);
+    const priceNum = parseFloat(price);
+    const shares = amountNum / priceNum;
+
+    const posIdx = data.positions.findIndex(p => p.symbol === symbol);
+    if (posIdx === -1) {
+      console.error(`Position ${symbol} not found`);
+      process.exit(1);
+    }
+    const pos = data.positions[posIdx];
+    const pnl = (priceNum - pos.cost) * shares;
+
+    pos.shares -= shares;
+    if (pos.shares <= 0.0001) {
+      data.positions.splice(posIdx, 1);
+    } else {
+      pos.currentPrice = priceNum;
+      pos.currentValue = pos.shares * priceNum;
+      pos.pnl = (priceNum - pos.cost) * pos.shares;
+      pos.pnlPct = parseFloat(((priceNum - pos.cost) / pos.cost * 100).toFixed(4));
+    }
+
+    data.summary.cash = (data.summary.cash || 0) + amountNum;
+
+    data.transactions.push({
+      date: today(),
+      asset: name || symbol,
+      action: '卖出',
+      shares: parseFloat(shares.toFixed(4)),
+      price: priceNum,
+      amount: amountNum,
+      pnl: parseFloat(pnl.toFixed(2)),
+      reason: note || ''
+    });
+
+    recalcSummary(data);
+    data.positions.forEach(p => {
+      p.weight = parseFloat(((p.currentValue / data.summary.totalAssets) * 100).toFixed(2));
+    });
+
+    appendHistory(data);
+    savePortfolio(data);
+    gitCommitAndPush(`sell ${symbol} ${shares.toFixed(2)}股 @${priceNum} pnl=${pnl.toFixed(2)}`);
+    console.log('✅ portfolio updated');
+
+  } else if (cmd === 'price') {
+    const { symbol, price } = opts;
+    if (!symbol || !price) {
+      console.error('price requires --symbol, --price');
+      process.exit(1);
+    }
+    const priceNum = parseFloat(price);
+    const pos = data.positions.find(p => p.symbol === symbol);
+    if (!pos) {
+      console.error(`Position ${symbol} not found`);
+      process.exit(1);
+    }
+    pos.currentPrice = priceNum;
+    pos.currentValue = pos.shares * priceNum;
+    pos.pnl = (priceNum - pos.cost) * pos.shares;
+    pos.pnlPct = parseFloat(((priceNum - pos.cost) / pos.cost * 100).toFixed(4));
+
+    recalcSummary(data);
+    data.positions.forEach(p => {
+      p.weight = parseFloat(((p.currentValue / data.summary.totalAssets) * 100).toFixed(2));
+    });
+
+    appendHistory(data);
+    savePortfolio(data);
+    gitCommitAndPush(`price update ${symbol} @${priceNum}`);
+    console.log('✅ portfolio updated');
+
+  } else if (cmd === 'sync') {
+    // Just recalc and push
+    recalcSummary(data);
+    appendHistory(data);
+    savePortfolio(data);
+    gitCommitAndPush(`sync portfolio ${today()}`);
+    console.log('✅ portfolio updated');
+
+  } else {
+    console.error(`Unknown command: ${cmd}`);
+    process.exit(1);
+  }
+}
+
+main().catch(err => {
+  console.error('❌ Error:', err.message);
+  process.exit(1);
+});
