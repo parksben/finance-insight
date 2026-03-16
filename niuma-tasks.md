@@ -28,6 +28,27 @@ _最后更新：2026-03-16_
 
 ## 巡检日志
 
+### 2026-03-16 13:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 13:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 12:53 CST
+- **CI**: niuma-server ✅, niuma-cli ✅, niuma-desktop-dock ⚠️ (repo 无 Actions 或无权限，HTTP 404)
+- **niuma-web CI ❌**: `PairingPage.tsx` TS2554 — `useRef<ReturnType<typeof setInterval>>()` 缺少初始值参数（strict mode）
+- **🔧 修复**: 添加 `undefined` 初始值 (commit 78bda47, pushed)，tsc 通过
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **其他模块**: 无新问题
+
 ### 2026-03-16 09:23 CST
 - **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
 - **Release v0.1.2**: 17 产物，体积正常 ✅
@@ -328,7 +349,35 @@ _最后更新：2026-03-16_
 - **鉴权/架构/README/CLI**: 无新问题
 - 无异常，静默结束
 
+### 2026-03-16 10:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
 ### 2026-03-16 09:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 10:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 11:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 12:23 CST
 - **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
 - **Release v0.1.2**: 17 产物，体积正常 ✅
 - **版本**: 全部 0.1.2 ✅
