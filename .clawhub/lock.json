@@ -16,6 +16,66 @@
     "agent-security-ops": {
       "version": "1.2.2",
       "installedAt": 1773600184288
+    },
+    "superdesign": {
+      "version": "1.0.0",
+      "installedAt": 1773600423973
+    },
+    "code-review": {
+      "version": "1.0.0",
+      "installedAt": 1773600424053
+    },
+    "openclaw-token-optimizer": {
+      "version": "3.0.0",
+      "installedAt": 1773600424422
+    },
+    "critical-code-reviewer": {
+      "version": "0.1.0",
+      "installedAt": 1773600436750
+    },
+    "shadcn-ui": {
+      "version": "1.0.0",
+      "installedAt": 1773600449814
+    },
+    "tailwind-design-system": {
+      "version": "1.0.0",
+      "installedAt": 1773601283237
+    },
+    "ui-ux-design": {
+      "version": "1.0.0",
+      "installedAt": 1773601321286
+    },
+    "clean-code-review": {
+      "version": "1.0.0",
+      "installedAt": 1773601321600
+    },
+    "architecture-designer": {
+      "version": "0.1.0",
+      "installedAt": 1773601381288
+    },
+    "10x-patterns": {
+      "version": "1.0.0",
+      "installedAt": 1773601383926
+    },
+    "product-manager": {
+      "version": "1.0.0",
+      "installedAt": 1773623040980
+    },
+    "prototype-generator": {
+      "version": "1.0.0",
+      "installedAt": 1773623041424
+    },
+    "pr-reviewer": {
+      "version": "1.0.1",
+      "installedAt": 1773623101256
+    },
+    "perf-profiler": {
+      "version": "1.0.0",
+      "installedAt": 1773623101639
+    },
+    "ui-ux-pro-max": {
+      "version": "0.1.0",
+      "installedAt": 1773623105215
     }
   }
 }
