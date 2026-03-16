@@ -32,8 +32,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-002
 - Title: niuma-server — AgentService & CronService
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-server
 - Depends: TASK-001
 - Description: |
@@ -46,8 +46,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-003
 - Title: niuma-server — GroupOrchestrator（群消息编排）
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-server
 - Depends: TASK-002
 - Description: |
@@ -62,8 +62,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-004
 - Title: niuma-server — 项目生命周期控制
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-server
 - Depends: TASK-003
 - Description: |
@@ -76,8 +76,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-005
 - Title: niuma-server — 产物文件系统（Workspace）
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-server
 - Description: |
     实现 WorkspaceService：
@@ -90,8 +90,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-006
 - Title: niuma-web — 项目初始化 & 路由
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-web
 - Description: |
     - Vite + React + TypeScript 初始化
@@ -102,8 +102,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-007
 - Title: niuma-web — 聊天列表页 & 单聊页面
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-web
 - Depends: TASK-006
 - Description: |
@@ -115,8 +115,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-008
 - Title: niuma-web — 员工管理页 & 创建员工向导
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-web
 - Depends: TASK-006
 - Description: |
@@ -127,8 +127,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-009
 - Title: niuma-web — 项目群管理 & 生命周期控制
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-web
 - Depends: TASK-007
 - Description: |
@@ -207,8 +207,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-014
 - Title: 凭证管理系统 — Server 端（OAuth + 手动双路径）
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-server
 - Depends: TASK-002
 - Priority: P1
@@ -299,8 +299,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-015
 - Title: 凭证管理系统 — Web 前端（一键绑定 + 手动配置）
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-web
 - Depends: TASK-014, TASK-006
 - Priority: P1
@@ -337,8 +337,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-016
 - Title: 凭证管理系统 — Agent 凭证注入
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-server
 - Depends: TASK-014, TASK-010
 - Priority: P1
@@ -362,4 +362,9 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ---
 
+## Activity Log
+- 2026-03-16 15:00 [builder] TASK-004 implemented & pushed (commit 13dba4d). Status → review.
+
 ## UpdatedAt: 2026-03-16
+## Activity Log
+- 2026-03-16 TASK-015: builder completed credential management UI, pushed to niuma-web main (3af2203), moved to review
