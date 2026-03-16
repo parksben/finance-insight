@@ -201,4 +201,127 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ---
 
-## UpdatedAt: 2026-03-15
+## Phase 1.5 — 凭证管理（员工权限配置）
+
+### TASK-014
+- Title: 凭证管理系统 — Server 端
+- Owner: builder
+- Status: todo
+- Repo: niuma-server
+- Depends: TASK-002
+- Priority: P1
+- Description: |
+    实现员工凭证（Token/API Key）统一管理后端：
+
+    **数据模型 credentials 表：**
+    - id, userId, label（显示名，如「我的 GitHub」）
+    - provider（平台标识，见下方枚举）
+    - tokenEncrypted（AES-256-GCM 加密存储）
+    - scopes[]（权限范围，如 ["repo","workflow"]）
+    - tags[]（用途标签，如 ["代码管理","CI/CD"]）
+    - expiresAt（过期时间，可选）
+    - createdAt, updatedAt
+
+    **支持的 provider 枚举（首批）：**
+    - github — Personal Access Token (Fine-grained)
+      · 接入方式：用户在 GitHub Settings > Developer Settings 生成 Fine-grained PAT
+      · 可控权限粒度：按仓库 + 按权限类型（Contents/Issues/Actions 等）
+      · Token 格式：github_pat_xxx
+      · 适用角色：程序员员工
+
+    - twitter — X/Twitter API OAuth 2.0
+      · 接入方式：developer.x.com 创建 App，获取 API Key + API Secret + Access Token + Access Token Secret + Bearer Token（共 5 个凭证）
+      · 权限分 3 档：Read / Read+Write / Read+Write+DM
+      · 存储为 JSON 对象：{ apiKey, apiSecret, accessToken, accessSecret, bearerToken }
+      · 适用角色：运营员工
+
+    - facebook — Meta Graph API
+      · 接入方式：developers.facebook.com 创建 App，OAuth 授权获取 Page Access Token
+      · Token 分类：User Token（短期2h）/ Page Token（长期）/ App Token
+      · 实际使用 Long-lived Page Token（60天有效，可续期）
+      · 权限通过 scope 控制：pages_manage_posts, pages_read_engagement 等
+      · 适用角色：运营员工
+
+    - instagram — Instagram Graph API（通过 Meta 平台）
+      · 接入方式：同 Facebook，需要 Instagram Business 账号绑定 Facebook Page
+      · 使用 Page Access Token + instagram_basic, instagram_content_publish scope
+      · 适用角色：运营员工
+
+    - xiaohongshu — 小红书开放平台
+      · 接入方式：open.xiaohongshu.com 注册开发者，创建应用获取 AppKey + AppSecret
+      · 授权流程：OAuth 2.0 授权码模式，获取 access_token + refresh_token
+      · Token 有效期短（需定期刷新），需实现自动续期逻辑
+      · 适用角色：运营员工
+
+    - custom — 自定义凭证（通用 Key-Value）
+      · 用户自行填写名称和凭证内容
+      · 适用任意第三方服务
+
+    **API 设计：**
+    - POST /api/credentials — 创建凭证
+    - GET /api/credentials — 列表（返回脱敏值，如 ghp_****xxxx）
+    - GET /api/credentials/:id — 详情（脱敏）
+    - PUT /api/credentials/:id — 更新
+    - DELETE /api/credentials/:id — 删除
+    - POST /api/credentials/:id/verify — 验证凭证有效性（调平台 API 测试）
+
+    **安全策略：**
+    - 加密：AES-256-GCM + 随机 IV，密钥从环境变量 CREDENTIAL_ENCRYPTION_KEY 读取
+    - API 响应永远不返回明文 Token，只返回脱敏值
+    - 操作审计日志：记录谁在何时创建/使用/删除了哪个凭证
+    - Agent 调用凭证时通过内部 API 获取解密值，不经过前端
+
+### TASK-015
+- Title: 凭证管理系统 — Web 前端
+- Owner: builder
+- Status: todo
+- Repo: niuma-web
+- Depends: TASK-014, TASK-006
+- Priority: P1
+- Description: |
+    在个人页面（/profile）中添加「凭证管理」模块：
+
+    **凭证列表：**
+    - 卡片式展示，每张卡片：平台图标 + 名称 + 标签 + 脱敏值 + 过期状态
+    - 过期/即将过期的凭证红色/黄色提示
+    - 支持按平台/标签筛选
+
+    **添加凭证流程：**
+    - Step 1: 选择平台（GitHub / Twitter / Facebook / Instagram / 小红书 / 自定义）
+    - Step 2: 显示该平台的接入引导（如何获取 Token 的简要说明 + 跳转链接）
+    - Step 3: 填写凭证信息（Token/Key，标签，备注）
+    - Step 4: 自动验证 → 保存
+
+    **凭证详情：**
+    - 基本信息（平台、创建时间、过期时间）
+    - 权限范围展示
+    - 标签管理（增删标签）
+    - 使用记录（哪些员工调用过）
+    - 删除按钮（二次确认）
+
+    **UI 要求：**
+    - 明文 Token 只在输入时可见，保存后不可再查看
+    - 复制脱敏值按钮（方便确认是哪个 Token）
+    - 各平台有对应品牌色图标
+
+### TASK-016
+- Title: 凭证管理系统 — Agent 凭证注入
+- Owner: builder
+- Status: todo
+- Repo: niuma-server
+- Depends: TASK-014, TASK-010
+- Priority: P1
+- Description: |
+    让 AI 员工能根据角色自动获取所需凭证：
+
+    - Agent 模板新增 requiredCredentials[] 字段，如：
+      frontend-dev.json: ["github"]
+      运营模板: ["twitter", "facebook", "xiaohongshu"]
+    - AgentService.spawnEmployee 时，检查所需凭证是否已配置
+    - 未配置时提示用户去个人页面配置
+    - 已配置时，通过环境变量或 context 注入解密后的凭证
+    - 凭证注入走内部 API，不经过 WebSocket 明文传输
+
+---
+
+## UpdatedAt: 2026-03-16
