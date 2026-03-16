@@ -1,5 +1,5 @@
 # Niuma 项目待办清单
-_最后更新：2026-03-15_
+_最后更新：2026-03-16_
 
 ## ❌ 未完成
 
@@ -27,6 +27,71 @@ _最后更新：2026-03-15_
 ---
 
 ## 巡检日志
+
+### 2026-03-16 09:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 07:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 06:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 06:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅（app 0.1.2）
+- **DB**: messages/chats 等表缺少外键索引（已知，非紧急）
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 05:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权**: templates.js 无 authMiddleware（公开端点，合理）✅
+- **README/CLI/架构**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 05:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **Server↔Web 对齐**: `/api/employees` 别名已存在 ✅
+- **鉴权覆盖**: 路由均有 authMiddleware（templates/connect 公开端点合理）✅
+- **README/CLI/架构**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 04:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 产物齐全（CLI 5, Server 5, Desktop 7），体积正常，版本号一致 ✅
+- **🔧 修复**: niuma-web 调用 `/api/employees` 但 server 只有 `/api/agents` → 在 index.js 添加 `/api/employees` 路由别名 (commit 2a952ed, pushed)
+- **版本**: niuma-server 0.1.2, niuma-web 0.1.2, niuma-cli 0.1.2, niuma-desktop 0.1.2 ✅
+- **README/CLI/架构**: 无新问题
+- **⚠️ 需通知 PengAn**: server 缺少 /api/employees 路由已修复
+
+### 2026-03-16 03:23 CST
+- **niuma-server**: CI ❌ failure → niuma-web TS error `LoginPage.tsx:20 'ready' unused` → 已修复 + rerun
+- **niuma-desktop**: CI ❌ failure → 同一 niuma-web TS error → 已修复 + rerun
+- **niuma-cli**: CI ✅ success (v0.1.2)
+- **niuma-app**: CI ✅ success (v0.1.0)
+- **修复**: niuma-web `ready` → `_ready` 消除 TS6133 (commit 68c122d)
+- **修复**: niuma-cli 版本 0.1.1 → 0.1.2 (commit 682cb40)
+- **修复**: niuma-web 版本 0.1.0 → 0.1.2 (commit 59d005a)
+- **发现**: release v0.1.2 的 desktop 产物文件名含 0.1.1（上次构建遗留），CI rerun 后应自动修正
+- **⚠️ 需通知 PengAn**
 
 ### 2026-03-16 02:23 CST
 - **niuma-desktop**: CI ✅ success (v0.1.2)
@@ -234,3 +299,38 @@ _最后更新：2026-03-15_
 - **niuma-desktop**: 最新 CI (run 23095911590) ✅ 成功；task #6 标记完成
 - **niuma-app**: CI 失败 (run 23096128241)，根因：`react-native-document-picker@9.3.1` 与 RN 0.84 不兼容（`GuardedResultAsyncTask` 已被移除），且该包在代码中未被使用。已推送修复 commit `a44481f`（从 package.json 删除该依赖）
 - **niuma-server**: "Build Release" (run 23095897406) 失败原因为旧版 workflow（`tar .` 包含自身 tarball）。该 workflow 已被 Bun binary 版替换，main 分支当前 release.yml 正常，仅触发于 tag push，无需额外修复。
+
+### 2026-03-16 02:53 CST
+- **niuma-server**: CI 🔄 queued
+- **niuma-desktop**: CI 🔄 in_progress
+- **niuma-cli**: CI 🔄 in_progress
+- **niuma-app**: CI ✅ success
+- **未完成任务**: 无；一切正常，静默结束
+
+### 2026-03-16 03:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ✅, niuma-cli ✅, niuma-app 🔄 in_progress
+- **版本一致性问题**: niuma-desktop package.json 仍为 0.1.1，其他模块已是 0.1.2 → 已修复 bump 到 0.1.2 (commit 3a670e2) + git push，CI 将自动触发
+- **Release 产物清理**: v0.1.2 release 中残留 6 个 0.1.1 版本的 desktop 产物（文件名含旧版本号）→ 已全部删除
+- **niuma-app**: 版本仍为 0.1.0（移动端独立节奏，暂不同步）
+- **⚠️ 需通知 PengAn**: desktop 版本落后已修复 + release 旧产物已清理
+
+### 2026-03-16 08:23 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 08:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 09:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束

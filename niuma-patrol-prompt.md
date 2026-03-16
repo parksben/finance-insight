@@ -38,6 +38,8 @@ niuma 技术巡检。执行以下检查：
 
 发现问题直接修复 + git push，改完汇总报告。仅在有实际改动或发现新问题时通知 PengAn（通过 WeCom），无事不扰。
 
+**重要原则：** 产品处于早期研发阶段，保持功能逻辑最小化，避免冗余实现。不要加别名/兼容层/wrapper，应该统一到一个正确的实现上。
+
 仓库位置：
 - /tmp/niuma-repos/niuma-server/
 - /tmp/niuma-repos/niuma-web/
