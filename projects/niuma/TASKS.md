@@ -203,106 +203,137 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ## Phase 1.5 — 凭证管理（员工权限配置）
 
+策略：能一键 OAuth 托管的平台走自动化流程，门槛高/API 受限的平台走手动配置兜底。
+
 ### TASK-014
-- Title: 凭证管理系统 — Server 端
+- Title: 凭证管理系统 — Server 端（OAuth + 手动双路径）
 - Owner: builder
 - Status: todo
 - Repo: niuma-server
 - Depends: TASK-002
 - Priority: P1
 - Description: |
-    实现员工凭证（Token/API Key）统一管理后端：
+    实现员工凭证统一管理后端，支持两种接入模式：
 
-    **数据模型 credentials 表：**
-    - id, userId, label（显示名，如「我的 GitHub」）
-    - provider（平台标识，见下方枚举）
+    **一、数据模型 credentials 表：**
+    - id, userId, label（显示名）
+    - provider（平台标识）
+    - authMode: "oauth" | "manual"（接入方式）
     - tokenEncrypted（AES-256-GCM 加密存储）
-    - scopes[]（权限范围，如 ["repo","workflow"]）
-    - tags[]（用途标签，如 ["代码管理","CI/CD"]）
-    - expiresAt（过期时间，可选）
+    - refreshTokenEncrypted（OAuth refresh_token，加密存储）
+    - scopes[]（权限范围）
+    - tags[]（用途标签，如 ["代码管理","社媒运营"]）
+    - expiresAt（过期时间）
+    - status: "active" | "expired" | "revoked" | "error"
     - createdAt, updatedAt
 
-    **支持的 provider 枚举（首批）：**
-    - github — Personal Access Token (Fine-grained)
-      · 接入方式：用户在 GitHub Settings > Developer Settings 生成 Fine-grained PAT
-      · 可控权限粒度：按仓库 + 按权限类型（Contents/Issues/Actions 等）
-      · Token 格式：github_pat_xxx
-      · 适用角色：程序员员工
+    **二、OAuth 一键绑定（完全托管）— 首批支持：**
 
-    - twitter — X/Twitter API OAuth 2.0
-      · 接入方式：developer.x.com 创建 App，获取 API Key + API Secret + Access Token + Access Token Secret + Bearer Token（共 5 个凭证）
-      · 权限分 3 档：Read / Read+Write / Read+Write+DM
-      · 存储为 JSON 对象：{ apiKey, apiSecret, accessToken, accessSecret, bearerToken }
-      · 适用角色：运营员工
+    🟢 github（GitHub App）
+    · 用户点「绑定」→ 跳转 GitHub Install 页面 → 选择仓库授权 → 回调
+    · 后端自动获取 installation_id → 按需生成 installation access token
+    · Token 自动续期（1小时有效，过期自动刷新）
+    · 权限粒度：按仓库 + 按类型（contents/issues/actions/pull_requests）
+    · 适用角色：程序员员工
 
-    - facebook — Meta Graph API
-      · 接入方式：developers.facebook.com 创建 App，OAuth 授权获取 Page Access Token
-      · Token 分类：User Token（短期2h）/ Page Token（长期）/ App Token
-      · 实际使用 Long-lived Page Token（60天有效，可续期）
-      · 权限通过 scope 控制：pages_manage_posts, pages_read_engagement 等
-      · 适用角色：运营员工
+    🟢 twitter（OAuth 2.0 PKCE）
+    · 用户点「绑定」→ 跳转 Twitter 授权页 → 同意 → 回调拿 access_token + refresh_token
+    · scope: tweet.read tweet.write users.read dm.read dm.write
+    · refresh_token 自动续期
+    · 适用角色：运营员工
 
-    - instagram — Instagram Graph API（通过 Meta 平台）
-      · 接入方式：同 Facebook，需要 Instagram Business 账号绑定 Facebook Page
-      · 使用 Page Access Token + instagram_basic, instagram_content_publish scope
-      · 适用角色：运营员工
+    🟢 facebook（Meta OAuth）
+    · 用户点「绑定」→ Meta OAuth 登录 → 授权 Page 权限 → 获取 Long-lived Page Token
+    · scope: pages_manage_posts, pages_read_engagement, pages_show_list
+    · Page Token 60天有效，后台定时 refresh 续期
+    · 适用角色：运营员工
 
-    - xiaohongshu — 小红书开放平台
-      · 接入方式：open.xiaohongshu.com 注册开发者，创建应用获取 AppKey + AppSecret
-      · 授权流程：OAuth 2.0 授权码模式，获取 access_token + refresh_token
-      · Token 有效期短（需定期刷新），需实现自动续期逻辑
-      · 适用角色：运营员工
+    🟢 instagram（Meta OAuth，同 Facebook 流程）
+    · 需 Instagram Business/Creator 账号已绑定 Facebook Page
+    · 额外 scope: instagram_basic, instagram_content_publish
+    · 适用角色：运营员工
 
-    - custom — 自定义凭证（通用 Key-Value）
-      · 用户自行填写名称和凭证内容
-      · 适用任意第三方服务
+    **三、手动配置（门槛高的平台兜底）：**
 
-    **API 设计：**
-    - POST /api/credentials — 创建凭证
-    - GET /api/credentials — 列表（返回脱敏值，如 ghp_****xxxx）
-    - GET /api/credentials/:id — 详情（脱敏）
+    🟡 tiktok
+    · Content Posting API 需双重审核（1-2周），先手动配置
+    · 后续审核通过后可升级为 OAuth 一键绑定
+    · 手动填写：access_token, open_id
+
+    🟡 xiaohongshu
+    · 需企业资质，个人发笔记 API 未开放
+    · 手动填写：app_key, app_secret, access_token
+    · 后台实现 refresh_token 自动续期
+
+    🟡 linkedin
+    · Share API 需单独申请 Marketing Developer Platform
+    · 手动填写：access_token
+
+    🔵 custom — 自定义凭证（通用 Key-Value）
+    · 用户自行填写，适用任意第三方服务
+
+    **四、OAuth 路由：**
+    - GET /api/oauth/:provider/authorize → 生成授权 URL，302 重定向
+    - GET /api/oauth/:provider/callback → 处理回调，存储 token，跳回前端
+    - POST /api/oauth/:provider/refresh → 手动触发 token 续期
+
+    **五、凭证 CRUD API：**
+    - POST /api/credentials — 创建（手动模式）
+    - GET /api/credentials — 列表（脱敏）
     - PUT /api/credentials/:id — 更新
     - DELETE /api/credentials/:id — 删除
-    - POST /api/credentials/:id/verify — 验证凭证有效性（调平台 API 测试）
+    - POST /api/credentials/:id/verify — 验证有效性
 
-    **安全策略：**
-    - 加密：AES-256-GCM + 随机 IV，密钥从环境变量 CREDENTIAL_ENCRYPTION_KEY 读取
-    - API 响应永远不返回明文 Token，只返回脱敏值
-    - 操作审计日志：记录谁在何时创建/使用/删除了哪个凭证
-    - Agent 调用凭证时通过内部 API 获取解密值，不经过前端
+    **六、自动续期服务：**
+    - TokenRefreshService：定时扫描即将过期凭证，自动 refresh
+    - GitHub: installation token 按需生成（1h有效）
+    - Twitter: refresh_token 换新 access_token
+    - Facebook/Instagram: Long-lived token 续期
+    - 续期失败 → status 置为 "error"，通知用户重新绑定
+
+    **七、安全策略：**
+    - AES-256-GCM + 随机 IV 加密存储，密钥从 CREDENTIAL_ENCRYPTION_KEY 读取
+    - API 永不返回明文 Token
+    - 操作审计日志
+    - Agent 通过内部 API 获取解密值，不经前端
 
 ### TASK-015
-- Title: 凭证管理系统 — Web 前端
+- Title: 凭证管理系统 — Web 前端（一键绑定 + 手动配置）
 - Owner: builder
 - Status: todo
 - Repo: niuma-web
 - Depends: TASK-014, TASK-006
 - Priority: P1
 - Description: |
-    在个人页面（/profile）中添加「凭证管理」模块：
+    个人页面（/profile）「凭证管理」模块：
 
     **凭证列表：**
-    - 卡片式展示，每张卡片：平台图标 + 名称 + 标签 + 脱敏值 + 过期状态
-    - 过期/即将过期的凭证红色/黄色提示
-    - 支持按平台/标签筛选
+    - 卡片式展示：平台图标 + 名称 + 绑定状态 + 标签 + 过期状态
+    - 状态指示：🟢已绑定 / 🟡即将过期 / 🔴已失效
+    - 按平台/标签筛选
 
-    **添加凭证流程：**
-    - Step 1: 选择平台（GitHub / Twitter / Facebook / Instagram / 小红书 / 自定义）
-    - Step 2: 显示该平台的接入引导（如何获取 Token 的简要说明 + 跳转链接）
-    - Step 3: 填写凭证信息（Token/Key，标签，备注）
-    - Step 4: 自动验证 → 保存
+    **一键绑定流程（GitHub/Twitter/Facebook/Instagram）：**
+    - 点击平台卡片上的「一键绑定」按钮
+    - 跳转到对应平台授权页（新窗口/重定向）
+    - 用户在平台上确认授权
+    - 自动回调 → 绑定完成 → 卡片变为已绑定状态
+    - 支持「解绑」和「重新绑定」
+
+    **手动配置流程（TikTok/小红书/LinkedIn/自定义）：**
+    - 点击「手动添加」
+    - 选择平台 → 显示接入引导（如何获取 Token + 跳转链接）
+    - 填写凭证 → 自动验证 → 保存
 
     **凭证详情：**
-    - 基本信息（平台、创建时间、过期时间）
-    - 权限范围展示
-    - 标签管理（增删标签）
-    - 使用记录（哪些员工调用过）
-    - 删除按钮（二次确认）
+    - 基本信息、绑定方式（OAuth/手动）、权限范围
+    - 标签管理、使用记录
+    - 过期倒计时（OAuth 的自动续期状态）
+    - 删除（二次确认）
 
     **UI 要求：**
-    - 明文 Token 只在输入时可见，保存后不可再查看
-    - 复制脱敏值按钮（方便确认是哪个 Token）
-    - 各平台有对应品牌色图标
+    - 各平台品牌色图标
+    - OAuth 绑定的平台显示「已托管·自动续期」标识
+    - 手动配置的平台显示「手动·需定期更新」提示
 
 ### TASK-016
 - Title: 凭证管理系统 — Agent 凭证注入
@@ -312,15 +343,22 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 - Depends: TASK-014, TASK-010
 - Priority: P1
 - Description: |
-    让 AI 员工能根据角色自动获取所需凭证：
+    让 AI 员工根据角色自动获取所需凭证：
 
-    - Agent 模板新增 requiredCredentials[] 字段，如：
+    - Agent 模板新增 requiredCredentials[] 字段：
       frontend-dev.json: ["github"]
-      运营模板: ["twitter", "facebook", "xiaohongshu"]
-    - AgentService.spawnEmployee 时，检查所需凭证是否已配置
-    - 未配置时提示用户去个人页面配置
-    - 已配置时，通过环境变量或 context 注入解密后的凭证
-    - 凭证注入走内部 API，不经过 WebSocket 明文传输
+      backend-dev.json: ["github"]
+      social-media-ops.json: ["twitter", "facebook", "instagram", "tiktok", "xiaohongshu"]
+    - AgentService.spawnEmployee 时检查所需凭证是否已绑定
+    - 未绑定 → 提示用户去个人页面绑定（区分一键/手动）
+    - 已绑定 → 通过内部 API 注入解密凭证（不经前端/WebSocket）
+    - OAuth 凭证注入时自动检查有效性，过期则先 refresh 再注入
+
+    **前置条件：** 需先在各平台注册开发者应用（一次性操作，由 PengAn 完成）：
+    - GitHub: 创建 GitHub App（github.com/settings/apps）
+    - Twitter: 创建 App（developer.x.com）
+    - Meta: 创建 App（developers.facebook.com）
+    - 各 App 的 client_id/secret 存入 server 环境变量
 
 ---
 
