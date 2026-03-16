@@ -20,7 +20,7 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 ### TASK-001
 - Title: niuma-server — Gateway 连接层
 - Owner: builder
-- Status: todo
+- Status: review
 - Repo: niuma-server
 - Description: |
     实现 src/gateway/ 模块：
@@ -140,8 +140,8 @@ AI 多 Agent 协作平台，类飞书 IM 体验，用户是老板，AI Agent 是
 
 ### TASK-010
 - Title: niuma-server — Agent 模板 Skill 定义（5个内置角色）
-- Owner: builder
-- Status: todo
+- Owner: reviewer
+- Status: review
 - Repo: niuma-server
 - Description: |
     在 src/skills/ 下创建 5 个内置 Agent 模板定义（JSON/YAML）：
