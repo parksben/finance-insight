@@ -1,40 +1,153 @@
 {
   "summary": {
     "initialCapital": 1000000,
-    "totalAssets": 997236,
+    "totalAssets": 0,
     "cumulativeReturn": -0.28,
     "weeklyReturn": -0.12,
     "maxDrawdown": -0.28,
     "winRate": 0,
     "vsCSI300": "518880止损清仓，全仓现金观望超级央行周",
-    "investedValue": 0,
-    "totalReturn": -2764,
-    "totalReturnPct": -0.28
+    "investedValue": 100000,
+    "totalReturn": -1000000,
+    "totalReturnPct": -100,
+    "cash": -100000
   },
-  "positions": [],
+  "positions": [
+    {
+      "symbol": "518880",
+      "name": "黄金ETF",
+      "direction": "long",
+      "shares": 12269.9387,
+      "cost": 8.15,
+      "currentPrice": 8.15,
+      "currentValue": 100000,
+      "pnl": 0,
+      "pnlPct": 0,
+      "weight": null
+    }
+  ],
   "navHistory": [
-    { "date": "2026-03-10", "nav": 1.0000, "totalAssets": 1000000 },
-    { "date": "2026-03-11", "nav": 1.0000, "totalAssets": 1000000 },
-    { "date": "2026-03-12", "nav": 0.9997, "totalAssets": 999671 },
-    { "date": "2026-03-13", "nav": 0.9984, "totalAssets": 998449 },
-    { "date": "2026-03-14", "nav": 0.9984, "totalAssets": 998449 },
-    { "date": "2026-03-15", "nav": 0.9984, "totalAssets": 998449 },
-    { "date": "2026-03-16", "nav": 0.9972, "totalAssets": 997236 }
+    {
+      "date": "2026-03-10",
+      "nav": 1,
+      "totalAssets": 1000000
+    },
+    {
+      "date": "2026-03-11",
+      "nav": 1,
+      "totalAssets": 1000000
+    },
+    {
+      "date": "2026-03-12",
+      "nav": 0.9997,
+      "totalAssets": 999671
+    },
+    {
+      "date": "2026-03-13",
+      "nav": 0.9984,
+      "totalAssets": 998449
+    },
+    {
+      "date": "2026-03-14",
+      "nav": 0.9984,
+      "totalAssets": 998449
+    },
+    {
+      "date": "2026-03-15",
+      "nav": 0.9984,
+      "totalAssets": 998449
+    },
+    {
+      "date": "2026-03-16",
+      "nav": 0.9972,
+      "totalAssets": 997236
+    }
   ],
   "history": [
-    { "date": "2026-03-10", "nav": 1, "csi300": 1 },
-    { "date": "2026-03-11", "nav": 1, "csi300": 1 },
-    { "date": "2026-03-12", "nav": 0.9997, "csi300": 1 },
-    { "date": "2026-03-13", "nav": 0.9984, "csi300": 0.998 },
-    { "date": "2026-03-14", "nav": 0.9984, "csi300": 0.998 },
-    { "date": "2026-03-15", "nav": 0.9984, "csi300": 0.998 },
-    { "date": "2026-03-16", "nav": 0.9972, "csi300": 0.998 }
+    {
+      "date": "2026-03-10",
+      "nav": 1,
+      "csi300": 1
+    },
+    {
+      "date": "2026-03-11",
+      "nav": 1,
+      "csi300": 1
+    },
+    {
+      "date": "2026-03-12",
+      "nav": 0.9997,
+      "csi300": 1
+    },
+    {
+      "date": "2026-03-13",
+      "nav": 0.9984,
+      "csi300": 0.998
+    },
+    {
+      "date": "2026-03-14",
+      "nav": 0.9984,
+      "csi300": 0.998
+    },
+    {
+      "date": "2026-03-15",
+      "nav": 0.9984,
+      "csi300": 0.998
+    },
+    {
+      "date": "2026-03-16",
+      "nav": 0.9972,
+      "csi300": 0.998
+    },
+    {
+      "date": "2026-03-17",
+      "nav": 0
+    }
   ],
   "transactions": [
-    { "date": "2026-03-10", "action": "开户", "symbol": "-", "price": null, "shares": null, "amount": 1000000 },
-    { "date": "2026-03-11", "action": "买入", "symbol": "518880", "price": 10.974, "shares": 9113, "amount": -100000 },
-    { "date": "2026-03-12", "action": "调整止损", "symbol": "518880", "price": null, "shares": null, "amount": 0, "note": "止损上移至10.67" },
-    { "date": "2026-03-16", "action": "止损卖出", "symbol": "518880", "price": 10.67, "shares": 9113, "amount": 97236, "note": "跌破止损线10.67，纪律性清仓" }
+    {
+      "date": "2026-03-10",
+      "action": "开户",
+      "symbol": "-",
+      "price": null,
+      "shares": null,
+      "amount": 1000000
+    },
+    {
+      "date": "2026-03-11",
+      "action": "买入",
+      "symbol": "518880",
+      "price": 10.974,
+      "shares": 9113,
+      "amount": -100000
+    },
+    {
+      "date": "2026-03-12",
+      "action": "调整止损",
+      "symbol": "518880",
+      "price": null,
+      "shares": null,
+      "amount": 0,
+      "note": "止损上移至10.67"
+    },
+    {
+      "date": "2026-03-16",
+      "action": "止损卖出",
+      "symbol": "518880",
+      "price": 10.67,
+      "shares": 9113,
+      "amount": 97236,
+      "note": "跌破止损线10.67，纪律性清仓"
+    },
+    {
+      "date": "2026-03-17",
+      "asset": "黄金ETF",
+      "action": "买入",
+      "shares": 12269.9387,
+      "price": 8.15,
+      "amount": -100000,
+      "reason": "Arbiter裁决：三方共识做多黄金，地缘风险对冲，10%仓位"
+    }
   ],
   "updatedAt": "2026-03-16"
 }
