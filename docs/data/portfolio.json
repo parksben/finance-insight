@@ -1,18 +1,30 @@
 {
   "summary": {
     "initialCapital": 1000000,
-    "totalAssets": 997236,
-    "cumulativeReturn": -0.28,
+    "totalAssets": 996945,
+    "cumulativeReturn": -0.31,
     "weeklyReturn": 0,
     "maxDrawdown": -0.28,
     "winRate": 0,
-    "vsCSI300": "全仓现金，止损清仓后观望",
-    "investedValue": 0,
-    "totalReturn": -2764,
-    "totalReturnPct": -0.2764,
-    "cash": 997236
+    "vsCSI300": "持有黄金ETF 10%仓位",
+    "investedValue": 99704,
+    "totalReturn": -3055,
+    "totalReturnPct": -0.3055,
+    "cash": 897241
   },
-  "positions": [],
+  "positions": [
+    {
+      "symbol": "518880",
+      "name": "黄金ETF华安",
+      "direction": "long",
+      "entryPrice": 10.637,
+      "shares": 9401,
+      "currentPrice": 10.606,
+      "marketValue": 99704,
+      "pnl": -291,
+      "entryDate": "2026-03-17"
+    }
+  ],
   "navHistory": [
     {
       "date": "2026-03-10",
@@ -53,6 +65,11 @@
       "date": "2026-03-17",
       "nav": 0.9972,
       "totalAssets": 997236
+    },
+    {
+      "date": "2026-03-18",
+      "nav": 0.9969,
+      "totalAssets": 996945
     }
   ],
   "history": [
@@ -97,7 +114,7 @@
     },
     {
       "date": "2026-03-18",
-      "nav": 0.997236
+      "nav": 0.9969
     }
   ],
   "transactions": [
@@ -145,5 +162,5 @@
       "reason": "Arbiter裁决：三方共识做多黄金，地缘风险对冲，10%仓位"
     }
   ],
-  "updatedAt": "2026-03-17"
+  "updatedAt": "2026-03-18"
 }
