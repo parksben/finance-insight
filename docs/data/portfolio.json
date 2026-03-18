@@ -3,13 +3,13 @@
     "initialCapital": 1000000,
     "totalAssets": 997236,
     "cumulativeReturn": -0.28,
-    "weeklyReturn": 0.0,
+    "weeklyReturn": 0,
     "maxDrawdown": -0.28,
     "winRate": 0,
     "vsCSI300": "全仓现金，止损清仓后观望",
     "investedValue": 0,
     "totalReturn": -2764,
-    "totalReturnPct": -0.28,
+    "totalReturnPct": -0.2764,
     "cash": 997236
   },
   "positions": [],
@@ -94,6 +94,10 @@
     {
       "date": "2026-03-17",
       "nav": 0.9972
+    },
+    {
+      "date": "2026-03-18",
+      "nav": 0.997236
     }
   ],
   "transactions": [
