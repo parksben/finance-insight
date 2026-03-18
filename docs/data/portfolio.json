@@ -3,29 +3,16 @@
     "initialCapital": 1000000,
     "totalAssets": 997236,
     "cumulativeReturn": -0.28,
-    "weeklyReturn": -0.12,
+    "weeklyReturn": 0.0,
     "maxDrawdown": -0.28,
     "winRate": 0,
-    "vsCSI300": "黄金ETF 10%建仓，防御为主",
-    "investedValue": 100000,
+    "vsCSI300": "全仓现金，止损清仓后观望",
+    "investedValue": 0,
     "totalReturn": -2764,
     "totalReturnPct": -0.28,
-    "cash": 897236
+    "cash": 997236
   },
-  "positions": [
-    {
-      "symbol": "518880",
-      "name": "黄金ETF",
-      "direction": "long",
-      "shares": 12269.9387,
-      "cost": 8.15,
-      "currentPrice": 8.15,
-      "currentValue": 100000,
-      "pnl": 0,
-      "pnlPct": 0,
-      "weight": 10.0
-    }
-  ],
+  "positions": [],
   "navHistory": [
     {
       "date": "2026-03-10",
