@@ -1,5 +1,5 @@
 # Niuma 项目待办清单
-_最后更新：2026-03-16_
+_最后更新：2026-03-18_
 
 ## ❌ 未完成
 
@@ -27,6 +27,93 @@ _最后更新：2026-03-16_
 ---
 
 ## 巡检日志
+
+### 2026-03-19 07:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-19 05:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-18 15:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI 构建失败: WiX `light.exe` 执行报错，同上次), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- **⚠️ Desktop 产物文件名仍缺产品名前缀**: `_0.1.6_aarch64.dmg` 等（Tauri productName 为中文"牛马"导致）
+- **⚠️ Windows MSI 缺失**: 同上次，WiX light.exe 失败
+- **版本分裂**: package.json server/cli/desktop 均为 0.1.5, **niuma-web 0.1.2**, tauri.conf.json 0.1.6, release tag v0.1.6
+- 无新变化，问题同上次巡检
+
+### 2026-03-18 07:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI 构建失败: WiX `light.exe` 执行报错), niuma-cli ✅, niuma Android CI ❌ (旧问题: minSdkVersion 需改为 23)
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（缺 Windows MSI — 因 CI 失败）
+- **⚠️ Desktop 产物文件名仍缺产品名前缀**: `_0.1.6_aarch64.dmg` 等（同上次）
+- **⚠️ Windows MSI 缺失**: Desktop Windows 构建 WiX light.exe 失败，release 中无 `.msi` 产物
+- **版本分裂**: package.json 均为 0.1.5, Cargo.toml 0.1.0, release tag v0.1.6 — 三处不一致
+- 其他检查项无新变化
+
+### 2026-03-18 05:53 CST
+- **CI**: niuma-server ✅, niuma-desktop 🔄 in_progress (v0.1.6 构建中), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物已上传，体积正常 ✅
+- **⚠️ Desktop 产物文件名缺失产品名前缀**: `_0.1.6_aarch64.dmg`、`_0.1.6_amd64.AppImage` 等缺少 `niuma` 前缀，RPM 为 `-0.1.6-1.x86_64.rpm`（Tauri productName 设为中文"牛马"导致构建产物名异常）
+- **版本分裂**: niuma-server 0.1.5, niuma-cli 0.1.5, niuma-app 0.1.5, **niuma-web 0.1.2**（仍未更新），tauri.conf.json 0.1.6, release tag v0.1.6
+- 其他检查项无新变化
+
+### 2026-03-18 03:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ✅, niuma-cli ✅, niuma-app ✅ — 全绿
+- **Release v0.1.5**: 17 产物（CLI 5 + Server 5 + Desktop 7），体积正常 ✅，文件名版本号一致 ✅
+- **版本**: niuma-server 0.1.5, niuma-cli 0.1.5, niuma-desktop 0.1.5, **niuma-web 0.1.2**（仍未更新）
+- **重大变化**: CI 全部恢复正常（CROSS_REPO_TOKEN 问题已解决），release 从 v0.1.2 跳到 v0.1.5
+- niuma-web 版本落后，但无功能性影响，记录待后续统一
+
+### 2026-03-17 23:53 CST
+- **CI**: niuma-server ❌ (Publish to niuma 失败: CROSS_REPO_TOKEN 权限不足，同前次), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release v0.1.3**: 已有 5 个 server 产物（体积正常 ✅），但缺少 CLI 5个 + Desktop 6+个产物
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- 无新问题，CI 失败原因同前，等待 PengAn 更新 CROSS_REPO_TOKEN
+
+### 2026-03-17 17:53 CST
+- **CI**: niuma-server ❌ (git clone niuma-web 失败: `URL rejected: Port number was not a decimal number`，CROSS_REPO_TOKEN 格式异常), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release**: 仍为 v0.1.2（17 产物），v0.1.3 未发布
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- CI 失败原因变化：从权限不足变为 token 格式问题，需 PengAn 重新生成 CROSS_REPO_TOKEN
+
+### 2026-03-17 07:53 CST
+- **CI**: niuma-server v0.1.3 ❌ (同上次: CROSS_REPO_TOKEN 权限不足), niuma-desktop ✅, niuma-cli ✅
+- **Release**: 仍为 v0.1.2（17 产物），v0.1.3 未发布
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- 无新变更，等待 PengAn 更新 CROSS_REPO_TOKEN 权限
+
+### 2026-03-17 05:53 CST
+- **CI**: niuma-server v0.1.3 ❌ (Publish to niuma 失败: `Resource not accessible by integration`，跨仓 release 权限不足), niuma-desktop ✅, niuma-cli ✅
+- **Release**: 仍为 v0.1.2（17 产物），v0.1.3 产物未发布
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2
+- **workspace 路由缺 auth**: `src/routes/workspace.js` 全部 5 个端点无 authMiddleware
+- **templates 路由缺 auth**: `src/routes/templates.js` 全部端点无 authMiddleware
+- **CI 失败原因**: CROSS_REPO_TOKEN 权限不足以创建 parksben/niuma 的 release，需更新 token 权限
+
+### 2026-03-17 01:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 17:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 15:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
 
 ### 2026-03-16 13:53 CST
 - **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
@@ -383,3 +470,151 @@ _最后更新：2026-03-16_
 - **版本**: 全部 0.1.2 ✅
 - **鉴权/架构/README/CLI**: 无新问题
 - 无异常，静默结束
+
+### 2026-03-16 19:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 21:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-17 03:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-16 23:53 CST
+- **CI**: 全部 ✅ (niuma-server, niuma-desktop, niuma-cli, niuma-app)
+- **Release v0.1.2**: 17 产物，体积正常 ✅
+- **版本**: 全部 0.1.2 ✅
+- **鉴权/架构/README/CLI**: 无新问题
+- 无异常，静默结束
+
+### 2026-03-17 09:53 CST
+- **CI**: niuma-server v0.1.3 ❌ (同上: CROSS_REPO_TOKEN 权限不足), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release**: 仍为 v0.1.2（17 产物），v0.1.3 未发布
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- 无新变更，等待 PengAn 更新 CROSS_REPO_TOKEN 权限
+
+### 2026-03-17 11:53 CST
+- **CI**: niuma-server v0.1.3 ❌ (同上: CROSS_REPO_TOKEN 权限不足), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release**: 仍为 v0.1.2（17 产物），v0.1.3 未发布
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- 无新变更，等待 PengAn 更新 CROSS_REPO_TOKEN 权限
+
+### 2026-03-17 13:53 CST
+- **CI**: niuma-server v0.1.3 ❌ (同上: CROSS_REPO_TOKEN 权限不足), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release**: 仍为 v0.1.2（17 产物），v0.1.3 未发布
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- 无新变更，等待 PengAn 更新 CROSS_REPO_TOKEN 权限
+
+### 2026-03-17 15:53 CST
+- **CI**: niuma-server v0.1.3 ❌ (同上: CROSS_REPO_TOKEN 格式错误致 git clone 失败), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release**: 仍为 v0.1.2（17 产物），v0.1.3 未发布
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- 无新变更，等待 PengAn 更新 CROSS_REPO_TOKEN
+
+### 2026-03-17 19:53 CST
+- **CI**: niuma-server v0.1.3 ❌ (同上: CROSS_REPO_TOKEN 格式错误致 git clone 失败), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release**: 仍为 v0.1.2（17 产物），v0.1.3 未发布
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- 无新变更，等待 PengAn 更新 CROSS_REPO_TOKEN
+
+### 2026-03-17 21:53 CST
+- **CI**: niuma-server v0.1.3 ❌ (同上: CROSS_REPO_TOKEN 格式错误), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release v0.1.3**: 已发布，但仅含 5 个 server 二进制产物，**缺少 CLI 二进制（5个）和 Desktop 产物（dmg/AppImage/exe 共7个）**
+- **Server 产物体积**: linux-arm64 98.8MB ✅, linux-x64 101.2MB ✅, macos-arm64 60.3MB ✅, macos-x64 65.0MB ✅, win-x64 111.5MB ✅
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- **⚠️ Release 产物不全**: v0.1.3 缺少 CLI 和 Desktop 产物，需要触发对应仓库的 release 构建
+- 其他检查项无新变化，等待 PengAn 更新 CROSS_REPO_TOKEN
+
+### 2026-03-18 01:53 CST
+- **CI**: niuma-server ❌ (同前: CROSS_REPO_TOKEN 权限不足), niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **Release v0.1.3**: 仅 5 个 server 产物（体积正常 ✅），仍缺 CLI 5个 + Desktop 7个
+- **版本分裂**: niuma-server 0.1.3, niuma-cli 0.1.3, niuma-desktop 0.1.2, niuma-web 0.1.2（无变化）
+- 无新问题，等待 PengAn 更新 CROSS_REPO_TOKEN
+
+### 2026-03-18 09:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI 构建失败, 同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物（CLI 5 ✅, Server 5 ✅, Desktop 7 — 缺 Windows MSI）
+- **⚠️ 持续问题**: Desktop 产物文件名缺产品名前缀、Windows MSI 缺失、版本分裂（package.json 0.1.5 vs tag v0.1.6）
+- 无新变化，同 07:53
+
+### 2026-03-18 11:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI 构建失败, 同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物（CLI 5 ✅, Server 5 ✅, Desktop 7 — 缺 Windows MSI）
+- **持续问题**: Desktop 产物文件名缺产品名前缀、Windows MSI 缺失、版本分裂（package.json 0.1.5 vs tag v0.1.6）
+- 无新变化，同 09:53
+
+### 2026-03-18 13:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI 构建失败, 同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物（CLI 5 ✅, Server 5 ✅, Desktop 7 — 缺 Windows MSI）
+- **持续问题**: Desktop 产物文件名缺产品名前缀、Windows MSI 缺失、版本分裂（package.json 0.1.5 vs tag v0.1.6）
+- 无新变化，同 11:53
+
+### 2026-03-18 17:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- **⚠️ Desktop 产物文件名缺产品名前缀**: 同前（Tauri productName 中文"牛马"导致）
+- **⚠️ Windows MSI 缺失**: 同前
+- **版本分裂**: server/cli/desktop package.json=0.1.5, niuma-web=0.1.2, tauri.conf.json=0.1.6, tag=v0.1.6
+- 无新变化，所有问题同上次巡检
+
+### 2026-03-18 19:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- **持续问题**: Desktop 产物文件名缺产品名前缀、Windows MSI 缺失、版本分裂（package.json 0.1.5 vs tag v0.1.6）
+- 无新变化，同 17:53
+
+### 2026-03-18 21:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- **持续问题**: Desktop 产物文件名缺产品名前缀、Windows MSI 缺失、版本分裂（package.json 0.1.5 vs tag v0.1.6）
+- 无新变化，同 19:53
+
+### 2026-03-18 23:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- **持续问题**: Desktop 产物文件名缺产品名前缀、Windows MSI 缺失、版本分裂（package.json 0.1.5 vs tag v0.1.6）
+- 无新变化，同 21:53
+
+### 2026-03-19 01:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- **持续问题**: Desktop 产物文件名缺产品名前缀、Windows MSI 缺失、版本分裂（package.json 0.1.5 vs tag v0.1.6）
+- 无新变化，同 23:53
+
+### 2026-03-19 03:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ❌ (Android minSdkVersion 需改为 23，同前)
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- **持续问题**: Desktop 产物文件名缺产品名前缀、Windows MSI 缺失、版本分裂（package.json 0.1.5 vs tag v0.1.6）
+- 无新变化，同 01:53
+
+### 2026-03-19 11:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-19 09:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅, niuma ❌ (Android minSdkVersion 需改为 23，同前)
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-19 13:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI: WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-19 15:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
