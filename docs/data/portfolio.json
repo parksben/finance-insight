@@ -1,15 +1,15 @@
 {
   "summary": {
     "initialCapital": 1000000,
-    "totalAssets": 996945,
+    "totalAssets": 897241,
     "cumulativeReturn": -0.31,
     "weeklyReturn": 0,
     "maxDrawdown": -0.28,
     "winRate": 0,
     "vsCSI300": "持有黄金ETF 10%仓位",
-    "investedValue": 99704,
-    "totalReturn": -3055,
-    "totalReturnPct": -0.3055,
+    "investedValue": 0,
+    "totalReturn": -102759,
+    "totalReturnPct": -10.2759,
     "cash": 897241
   },
   "positions": [
@@ -115,6 +115,10 @@
     {
       "date": "2026-03-18",
       "nav": 0.9969
+    },
+    {
+      "date": "2026-03-19",
+      "nav": 0.897241
     }
   ],
   "transactions": [
