@@ -76,6 +76,122 @@
     "ui-ux-pro-max": {
       "version": "0.1.0",
       "installedAt": 1773623105215
+    },
+    "monitoring": {
+      "version": "1.0.0",
+      "installedAt": 1773644524696
+    },
+    "task-progress-stream": {
+      "version": "0.1.0",
+      "installedAt": 1773644524697
+    },
+    "ci-cd": {
+      "version": "1.0.0",
+      "installedAt": 1773644526658
+    },
+    "e2e-test-orchestrator": {
+      "version": "1.0.0",
+      "installedAt": 1773644527047
+    },
+    "design-system-creation": {
+      "version": "1.0.0",
+      "installedAt": 1773666301301
+    },
+    "developer": {
+      "version": "1.0.0",
+      "installedAt": 1773666361976
+    },
+    "explain-code": {
+      "version": "1.0.0",
+      "installedAt": 1773709441567
+    },
+    "design-system-components": {
+      "version": "1.0.0",
+      "installedAt": 1773709441764
+    },
+    "system-architect": {
+      "version": "1.0.0",
+      "installedAt": 1773709442141
+    },
+    "api-designer": {
+      "version": "0.1.0",
+      "installedAt": 1773709442351
+    },
+    "cicd-pipeline-generator": {
+      "version": "0.1.0",
+      "installedAt": 1773730921679
+    },
+    "code-stats": {
+      "version": "1.0.0",
+      "installedAt": 1773730922054
+    },
+    "architecture-patterns": {
+      "version": "1.0.0",
+      "installedAt": 1773730922588
+    },
+    "animations": {
+      "version": "1.0.0",
+      "installedAt": 1773752607163
+    },
+    "models": {
+      "version": "1.0.0",
+      "installedAt": 1773752607201
+    },
+    "senior-devops": {
+      "version": "2.1.1",
+      "installedAt": 1773752641196
+    },
+    "token-efficiency-guide": {
+      "version": "1.1.0",
+      "installedAt": 1773860521329
+    },
+    "e2e-testing-patterns": {
+      "version": "1.0.0",
+      "installedAt": 1773860521604
+    },
+    "test-master": {
+      "version": "0.1.0",
+      "installedAt": 1773860522062
+    },
+    "frontend-design-3": {
+      "version": "0.1.0",
+      "installedAt": 1773882279937
+    },
+    "jtbd-analyzer": {
+      "version": "1.0.0",
+      "installedAt": 1773882280159
+    },
+    "logging-observability": {
+      "version": "0.1.0",
+      "installedAt": 1773882280195
+    },
+    "observability-designer": {
+      "version": "2.1.1",
+      "installedAt": 1773882281044
+    },
+    "context-slimmer": {
+      "version": "1.0.0",
+      "installedAt": 1773925428055
+    },
+    "devops": {
+      "version": "1.0.0",
+      "installedAt": 1773925441289
+    },
+    "gitflow": {
+      "version": "1.0.4",
+      "installedAt": 1774011808233
+    },
+    "software-engineer": {
+      "version": "1.0.0",
+      "installedAt": 1774011840907
+    },
+    "proto-cog": {
+      "version": "1.0.1",
+      "installedAt": 1774011841143
+    },
+    "web-perf": {
+      "version": "1.0.0",
+      "installedAt": 1774011848637
     }
   }
 }

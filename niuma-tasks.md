@@ -28,6 +28,16 @@ _最后更新：2026-03-18_
 
 ## 巡检日志
 
+### 2026-03-20 13:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-19 21:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
 ### 2026-03-19 07:53 CST
 - **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
 - **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
@@ -615,6 +625,66 @@ _最后更新：2026-03-18_
 - 无新变化，所有已知问题同上次巡检
 
 ### 2026-03-19 15:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-19 17:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-19 19:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-19 23:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 01:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 03:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 05:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 07:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 09:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ❌ (Android Gradle assembleDebug 失败: minSdkVersion 需改为 23，同前)
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 11:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 15:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 17:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-20 19:53 CST
 - **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
 - **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
 - 无新变化，所有已知问题同上次巡检
