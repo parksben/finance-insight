@@ -1,20 +1,23 @@
 #!/bin/bash
-# AIClient2API 免费模型可用性监控
-# 每10分钟运行一次，检测所有免费模型是否可用
-# 全部不可用时通知 PengAn
-
-API_BASE="http://127.0.0.1:3001/v1"
+# AIClient2API 免费模型可用性监控（按 provider 路径精确测试）
+API_BASE="http://127.0.0.1:3001"
 API_KEY="sk-19763297d0b71b0bf88dd0e42dcefe41"
-TIMEOUT=30
-MODELS=("gemini-2.5-pro" "gemini-2.5-flash" "gemini-3.1-pro-preview" "gemini-2.5-flash-lite" "gemini-3-pro-preview" "gemini-3-flash-preview")
+TIMEOUT=20
 STATUS_FILE="/tmp/ac2api-health-status.json"
+
+declare -A PROVIDERS
+PROVIDERS["ac2api-qwen/qwen3-coder-plus"]="openai-qwen-oauth/v1|qwen3-coder-plus"
+PROVIDERS["ac2api-qwen/qwen3-coder-flash"]="openai-qwen-oauth/v1|qwen3-coder-flash"
+PROVIDERS["ac2api-gemini/gemini-2.5-flash"]="gemini-antigravity/v1|gemini-2.5-flash"
+PROVIDERS["ac2api-gemini/gemini-2.5-pro"]="gemini-cli-oauth/v1|gemini-2.5-pro"
 
 available=()
 failed=()
 
-for model in "${MODELS[@]}"; do
+for name in "${!PROVIDERS[@]}"; do
+  IFS='|' read -r path model <<< "${PROVIDERS[$name]}"
   response=$(curl -s --max-time $TIMEOUT -w "\n%{http_code}" \
-    "$API_BASE/chat/completions" \
+    "$API_BASE/$path/chat/completions" \
     -H "Authorization: Bearer $API_KEY" \
     -H "Content-Type: application/json" \
     -d "{\"model\":\"$model\",\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}],\"max_tokens\":5}" 2>&1)
@@ -22,43 +25,39 @@ for model in "${MODELS[@]}"; do
   http_code=$(echo "$response" | tail -1)
   body=$(echo "$response" | sed '$d')
   
-  if [ "$http_code" = "200" ]; then
-    available+=("$model")
+  if echo "$body" | grep -q '"choices"'; then
+    available+=("$name")
   else
-    failed+=("$model (HTTP $http_code)")
+    err=$(echo "$body" | python3 -c "import sys,json;d=json.load(sys.stdin);print(d.get('error',{}).get('message','?')[:60])" 2>/dev/null || echo "timeout/error")
+    failed+=("$name ($err)")
   fi
 done
 
 timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 available_count=${#available[@]}
 failed_count=${#failed[@]}
-total=${#MODELS[@]}
+total=${#PROVIDERS[@]}
 
-# Write status file
 cat > "$STATUS_FILE" << EOF
 {
   "timestamp": "$timestamp",
   "total": $total,
   "available": $available_count,
-  "failed": $failed_count,
-  "available_models": [$(printf '"%s",' "${available[@]}" | sed 's/,$//')]  ,
-  "failed_models": [$(printf '"%s",' "${failed[@]}" | sed 's/,$//')]
+  "failed": $failed_count
 }
 EOF
 
 echo "[$timestamp] Available: $available_count/$total | Failed: $failed_count"
-echo "  Available: ${available[*]:-none}"
-echo "  Failed: ${failed[*]:-none}"
+for m in "${available[@]}"; do echo "  ✅ $m"; done
+for m in "${failed[@]}"; do echo "  ❌ $m"; done
 
-# Output result for cron agent to interpret
 if [ $available_count -eq 0 ]; then
   echo ""
-  echo "🚨 ALERT: ALL free models are DOWN! Currently falling back to GitHub Copilot (paid)."
-  echo "Please notify PengAn immediately."
+  echo "🚨 ALERT: ALL free models are DOWN!"
   echo "NOTIFY_PENGAN=true"
 elif [ $failed_count -gt 0 ]; then
   echo ""
-  echo "⚠️ WARNING: $failed_count/$total models unavailable, but $available_count still working."
+  echo "⚠️ WARNING: $failed_count/$total unavailable, $available_count still working."
   echo "NOTIFY_PENGAN=false"
 else
   echo ""
