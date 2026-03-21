@@ -1,5 +1,5 @@
 # Niuma 项目待办清单
-_最后更新：2026-03-18_
+_最后更新：2026-03-21 10:01 CST_
 
 ## ❌ 未完成
 
@@ -27,6 +27,24 @@ _最后更新：2026-03-18_
 ---
 
 ## 巡检日志
+
+### 2026-03-21 10:01 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 持续失败), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（缺 Windows .exe MSI）
+- **版本一致性**: server=0.1.5, cli=0.1.5, desktop=0.1.6, web=0.1.2（web 版本偏低，属已知差异）
+- **niuma-web name**: `niuma-web-work`（非正式命名，非关键）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-21 08:01 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，持续), niuma-cli ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI exe）
+- 所有仓库代码无变化（Already up to date）
+- 无新问题，所有已知问题同上次巡检
+
+### 2026-03-21 03:54 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI exe）
+- 无新变化，所有已知问题同上次巡检
 
 ### 2026-03-20 13:53 CST
 - **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
@@ -680,6 +698,11 @@ _最后更新：2026-03-18_
 - 无新变化，所有已知问题同上次巡检
 
 ### 2026-03-20 17:53 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
+- 无新变化，所有已知问题同上次巡检
+
+### 2026-03-21 02:01 CST
 - **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
 - **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
 - 无新变化，所有已知问题同上次巡检
