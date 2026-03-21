@@ -192,6 +192,22 @@
     "web-perf": {
       "version": "1.0.0",
       "installedAt": 1774011848637
+    },
+    "ux": {
+      "version": "1.0.0",
+      "installedAt": 1774033981185
+    },
+    "tokenmeter": {
+      "version": "0.1.1",
+      "installedAt": 1774033988171
+    },
+    "deploy": {
+      "version": "1.0.0",
+      "installedAt": 1774056062709
+    },
+    "brainstorming": {
+      "version": "0.1.0",
+      "installedAt": 1774056065122
     }
   }
 }
