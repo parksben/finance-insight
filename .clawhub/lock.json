@@ -240,6 +240,18 @@
     "prd-writer": {
       "version": "1.0.1",
       "installedAt": 1774141582858
+    },
+    "graphic-design": {
+      "version": "1.0.0",
+      "installedAt": 1774162934477
+    },
+    "aws-solution-architect": {
+      "version": "2.1.1",
+      "installedAt": 1774162939601
+    },
+    "product-strategist": {
+      "version": "2.1.1",
+      "installedAt": 1774162942064
     }
   }
 }
