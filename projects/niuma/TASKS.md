@@ -1,5 +1,5 @@
 # Niuma 项目待办清单
-_最后更新：2026-03-22 12:08 CST_
+_最后更新：2026-03-22 16:08 CST_
 
 ## ❌ 未完成
 
@@ -27,6 +27,15 @@ _最后更新：2026-03-22 12:08 CST_
 ---
 
 ## 巡检日志
+
+### 2026-03-22 16:08 CST
+- **CI**: niuma-server ✅, niuma-cli ✅, niuma-desktop ✅（最新 run 2026-03-21 成功）, niuma-app ✅（全绿）
+- **新提交**: 无（各仓库均 Already up to date，上次巡检后无新 push）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）；体积正常；文件名前缀已正确（`Niuma_0.1.6_...`）✅
+- **Desktop MSI**: `Niuma_0.1.6_x64_en-US.msi` (3.9MB) ✅ 已存在，持续多个巡检周期的 Windows MSI 缺失问题已于 2026-03-21 修复
+- **CLI install.js**: 已无 git clone + npm install，改为二进制下载 ✅
+- **DB 索引**: 13 个索引已到位 ✅
+- 无新问题，无需修复，静默结束
 
 ### 2026-03-22 14:08 CST
 - **CI**: niuma-server ✅, niuma-cli ✅, niuma-desktop ✅（最新 run 2026-03-21 成功）, niuma-app ✅（全绿）
