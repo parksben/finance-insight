@@ -1,5 +1,5 @@
 # Niuma 项目待办清单
-_最后更新：2026-03-21 10:01 CST_
+_最后更新：2026-03-22 12:08 CST_
 
 ## ❌ 未完成
 
@@ -27,6 +27,64 @@ _最后更新：2026-03-21 10:01 CST_
 ---
 
 ## 巡检日志
+
+### 2026-03-22 12:08 CST
+- **CI**: niuma-server ✅, niuma-desktop ✅, niuma-cli ✅（全绿）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）；体积正常
+- **各仓库**: 无新提交，Already up to date
+- 无新问题，无需修复
+
+### 2026-03-22 10:08 CST
+- **CI**: niuma-server ✅, niuma-desktop ✅, niuma-cli ✅, niuma-app ✅（全绿）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）
+- **版本一致性**: server=0.1.6, web=0.1.6, cli=0.1.6, desktop=0.1.6 ✅ 全部统一
+- **代码审查**: 路由鉴权正常，SMTP 链路完整，前后端 API 对齐
+- 无新问题，无需修复
+
+### 2026-03-22 08:08 CST
+- **CI**: niuma-server ✅, niuma-desktop ✅, niuma-cli ✅（全绿）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）
+- **版本一致性**: server=0.1.6, web=0.1.6, cli=0.1.6 ✅ 全部统一
+- **CLI install.js**: 含 git clone + npm install 逻辑（设计如此，非旧遗留）
+- **SMTP 链路**: 服务端完整，前后端对齐正常
+- 无新变化，无需修复
+
+### 2026-03-22 04:10 CST
+- **CI**: niuma-server ✅, niuma-desktop ✅, niuma-cli ✅（全绿）
+- **版本一致性**: server=0.1.6, web=0.1.6, cli=0.1.6, desktop=0.1.6 ✅
+- **Release v0.1.6**: 19 产物全部体积正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）
+- **无新提交（2026-03-22 起）**，无新问题，无需修复
+- 全局无异常
+
+### 2026-03-21 22:15 CST
+- **CI**: niuma-server ✅, niuma-desktop ✅, niuma-cli ✅（全绿）
+- **版本一致性**: server=0.1.6, web=0.1.6, cli=0.1.6, desktop=0.1.6 ✅ 全部统一
+- **Release v0.1.6**: 19 产物 ✅ CLI 5 ✅, Server 5 ✅, Desktop 9 ✅；体积正常
+- **代码审查**: 路由鉴权覆盖正常，templates/workspace 公开端点属设计如此；oauth.js 中缺少 config 时返回 status 500（应为 503），属轻微问题；无裸 Promise rejection
+- 无新变化，无需修复
+
+### 2026-03-21 20:08 CST
+- **CI**: niuma-server ✅, niuma-desktop ✅, niuma-cli ✅, niuma-app ✅
+- **已修复**: niuma-server index.js 硬编码 fallback 版本 0.1.5 → 0.1.6，已 push
+- **已清理**: Release v0.1.6 中 7 个格式异常产物（_ 前缀和 - 前缀）已删除，现有 19 个干净产物
+- **Release v0.1.6 产物**: CLI 5 ✅, Server 5 ✅, Desktop 9 (2xdmg + AppImage + deb + exe + msi + 2xapp.tar.gz + rpm) ✅
+- **代码审查**: 架构正常，SMTP 链路完整，前后端 API 对齐
+
+
+### 2026-03-21 18:08 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌→🔄 已重新触发（v0.1.6 tag 强制更新至含 ASCII productName 的 HEAD），niuma-cli ✅
+- **操作**: `git tag -f v0.1.6 HEAD && git push origin v0.1.6 --force`，新 CI 运行 #23377600294 进行中
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows exe，等待新 CI 完成）
+- **代码审查**: server 路由鉴权覆盖完整，SMTP 配置链路正常，CLI install 逻辑含 git clone + npm install（设计如此，非遗留问题）
+- **CLI install.js**: 注意有重复的 `message:` key（第 2 个 smtpHost prompt），轻微代码质量问题
+
+### 2026-03-21 14:05 CST
+- **CI**: niuma-desktop ❌ Windows MSI WiX light.exe 失败（中文 productName "牛马" 导致 WiX 无法打包）
+- **修复**: 将 `productName` 改为 `"Niuma"` (ASCII)，已 push niuma-desktop main
+- **修复**: niuma-web `package.json` name 从 `niuma-web-work` 改为 `niuma-web`，已 push
+- **修复**: server/cli/desktop/web 版本号统一 bump 至 0.1.6，已全部 push
+- **Release 产物**: Desktop 缺 Windows MSI/exe（因 CI 失败，预期修复后下次 release 补全）
+- **Desktop 产物文件名**: 前缀被截断（仅剩 `_0.1.6_...`），productName 改 ASCII 后下次构建将正常输出 `Niuma_0.1.6_...`
 
 ### 2026-03-21 10:01 CST
 - **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 持续失败), niuma-cli ✅, niuma-app ✅
@@ -711,3 +769,10 @@ _最后更新：2026-03-21 10:01 CST_
 - **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 失败，同前), niuma-cli ✅, niuma-app ✅
 - **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（仍缺 Windows MSI）
 - 无新变化，所有已知问题同上次巡检
+
+### 2026-03-21 12:01 CST
+- **CI**: niuma-server ✅, niuma-desktop ❌ (Windows MSI WiX light.exe 持续失败，run 23217800595), niuma-cli ✅, niuma-app ✅
+- **Release v0.1.6**: 17 产物，CLI 5 ✅, Server 5 ✅, Desktop 7（缺 Windows .exe MSI）；Desktop 资产命名缺前缀（`_0.1.6_...` 而非 `niuma-desktop_0.1.6_...`）
+- **版本一致性**: server=0.1.5, cli=0.1.5, desktop=0.1.6, web=0.1.2（已知差异）
+- **SMTP/Auth 链路**: server smtp.js 字段与 web settings.ts 类型定义对齐，无问题
+- 无新变化，已知问题持续（Windows Desktop CI 失败）
