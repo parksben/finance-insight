@@ -208,6 +208,38 @@
     "brainstorming": {
       "version": "0.1.0",
       "installedAt": 1774056065122
+    },
+    "memory-tiering": {
+      "version": "1.0.0",
+      "installedAt": 1774073400704
+    },
+    "cicd-pipeline": {
+      "version": "1.0.0",
+      "installedAt": 1774076898499
+    },
+    "designer": {
+      "version": "1.0.0",
+      "installedAt": 1774076900697
+    },
+    "token-optimization": {
+      "version": "1.1.0",
+      "installedAt": 1774099163795
+    },
+    "ui-ux-pro-max-plus": {
+      "version": "1.0.0",
+      "installedAt": 1774099166549
+    },
+    "ci-cd-pipeline": {
+      "version": "2.0.0",
+      "installedAt": 1774141575027
+    },
+    "requirements-analysis": {
+      "version": "1.0.0",
+      "installedAt": 1774141580204
+    },
+    "prd-writer": {
+      "version": "1.0.1",
+      "installedAt": 1774141582858
     }
   }
 }

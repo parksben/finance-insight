@@ -8,7 +8,7 @@
 - **定位：** AI 驱动的多 Agent 协作平台 —— 类飞书 IM 体验，用户是老板，AI Agent 是员工
 - **底层引擎：** OpenClaw Gateway（WebSocket RPC + sessions API + cron）
 - **创建日期：** 2026-03-10
-- **当前版本：** v0.1.2（2026-03-15/16 发布）
+- **当前版本：** v0.1.6（2026-03-17 发布，Latest）
 - **License：** MIT
 - **Logo：** 折纸风格萌牛头，橙色 #FF6B35，SVG 源文件在 niuma-desktop，公开 URL: https://assets.parksben.xyz/images/518f8caf7736874b.png
 
@@ -117,6 +117,10 @@ messages 表支持: type(text/voice/file), file_url, file_name, file_size, durat
 | v0.1.0 | 03-15/16 | 首发：全平台构建，release 资产齐全 |
 | v0.1.1 | 03-16 | 修复 niuma-web TS 错误，私有仓库 clone 认证 |
 | v0.1.2 | 03-16 | 登录改邮箱 OTP，主题色改橙 #FF6B35，安全修复(JWT/settings auth/port)，路由对齐 |
+| v0.1.3 | 03-17 | bun:sqlite 替换 native sqlite3，默认端口 51700，GroupOrchestrator，AgentService/CronService，5个 Agent 模板 JSON |
+| v0.1.4 | 03-17 | 凭证管理系统(TASK-014/016)，Agent spawn 时注入 credentials，group lifecycle 状态机，共享记忆(knowledge_docs)，OpenClaw Gateway 隔离(config.json)，动态端口自增，StateManager+WS Server+GatewayBridge 实时状态架构 |
+| v0.1.5 | 03-17 | desktop 重命名资产修复 |
+| v0.1.6 | 03-17 | Bun 编译兼容修复(fs.readFileSync → require)，package.json graceful fallback |
 
 ---
 
