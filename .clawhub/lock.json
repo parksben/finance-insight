@@ -19,11 +19,11 @@
     },
     "superdesign": {
       "version": "1.0.0",
-      "installedAt": 1773600423973
+      "installedAt": 1774184589871
     },
     "code-review": {
       "version": "1.0.0",
-      "installedAt": 1773600424053
+      "installedAt": 1774206062644
     },
     "openclaw-token-optimizer": {
       "version": "3.0.0",
@@ -39,11 +39,11 @@
     },
     "tailwind-design-system": {
       "version": "1.0.0",
-      "installedAt": 1773601283237
+      "installedAt": 1774184592148
     },
     "ui-ux-design": {
       "version": "1.0.0",
-      "installedAt": 1773601321286
+      "installedAt": 1774184597381
     },
     "clean-code-review": {
       "version": "1.0.0",
@@ -51,7 +51,7 @@
     },
     "architecture-designer": {
       "version": "0.1.0",
-      "installedAt": 1773601381288
+      "installedAt": 1774184594960
     },
     "10x-patterns": {
       "version": "1.0.0",
@@ -127,7 +127,7 @@
     },
     "architecture-patterns": {
       "version": "1.0.0",
-      "installedAt": 1773730922588
+      "installedAt": 1774286776533
     },
     "animations": {
       "version": "1.0.0",
@@ -155,7 +155,7 @@
     },
     "frontend-design-3": {
       "version": "0.1.0",
-      "installedAt": 1773882279937
+      "installedAt": 1774286288800
     },
     "jtbd-analyzer": {
       "version": "1.0.0",
@@ -252,6 +252,34 @@
     "product-strategist": {
       "version": "2.1.1",
       "installedAt": 1774162942064
+    },
+    "github-actions-generator": {
+      "version": "1.0.0",
+      "installedAt": 1774184602634
+    },
+    "token-saver": {
+      "version": "3.0.0",
+      "installedAt": 1774184605519
+    },
+    "ui-design": {
+      "version": "1.0.0",
+      "installedAt": 1774206064975
+    },
+    "token-cost-estimator": {
+      "version": "1.0.1",
+      "installedAt": 1774286283089
+    },
+    "testing-patterns": {
+      "version": "0.1.0",
+      "installedAt": 1774286821416
+    },
+    "openclaw-token-memory-optimizer": {
+      "version": "1.0.0",
+      "installedAt": 1774287466691
+    },
+    "easy-ci-cd": {
+      "version": "1.0.0",
+      "installedAt": 1774287480980
     }
   }
 }

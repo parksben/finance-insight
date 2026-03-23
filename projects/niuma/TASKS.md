@@ -1,5 +1,5 @@
 # Niuma 项目待办清单
-_最后更新：2026-03-22 16:08 CST_
+_最后更新：2026-03-23 04:08 CST_
 
 ## ❌ 未完成
 
@@ -27,6 +27,64 @@ _最后更新：2026-03-22 16:08 CST_
 ---
 
 ## 巡检日志
+
+### 2026-03-24 01:04 CST
+- **新提交 (v0.1.7)**:
+  - `niuma-server a2ecf04`: fix: resolve public dir from executable path, bundle frontend with release tar.gz（编译二进制从 process.execPath 目录查找 public/，CI 将前端打包进 .tar.gz）
+  - `niuma-server bffa216`: chore: bump version to 0.1.7
+  - `niuma-cli ca9e2ae`: chore: bump version to 0.1.7（+install.js 修复 syntax error）
+- **CI**:
+  - niuma-cli ✅ v0.1.7 成功（23449337802，全 5 平台产物已上传 niuma release）
+  - niuma-server ❌ v0.1.7 连续失败 3 次（23449230282, 23449525210, 23450088865）——**根因：GitHub Actions budget (minutes quota) 耗尽**，bun-linux-arm64/windows-x64 job 均报 "Actions budget is preventing further use"，非代码问题
+  - niuma-desktop ✅（最近 run v0.1.6，无新 tag）
+  - niuma-app ✅（无新 run）
+- **Release v0.1.7**: 当前仅 5 个 CLI 产物（niuma-linux-arm64/x64, niuma-macos-arm64/x64, niuma-win-x64.exe，体积正常 ✅）；**缺 server 产物（niuma-server-*）**，因 CI 失败；Desktop 未发布 v0.1.7 tag
+- **Release v0.1.6**: 19 产物完整（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）仍可用
+- **版本一致性**: server=0.1.7, cli=0.1.7, web=0.1.7, desktop=0.1.6（未 bump）
+- **⚠️ 需 PengAn 处理**: GitHub Actions minutes 配额已耗尽，niuma-server CI 无法运行。需要在 GitHub 账户补充 Actions minutes 或等待月度重置后重新触发 v0.1.7 server CI
+- **代码质量**: index.js 中 APP_VERSION fallback 仍写死 '0.1.6'（未随 bump 更新），但编译产物从 package.json 读取，影响有限
+
+### 2026-03-23 04:08 CST
+- **CI**: niuma-server ✅ (2026-03-17), niuma-cli ✅ (2026-03-22), niuma-app ✅ (2026-03-17)
+- **新提交**: 无（各仓库 Already up to date）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）；体积正常 ✅
+- **版本一致性**: 各仓库均未变更，与上次巡检一致 ✅
+- 无新问题，无需修复，静默结束
+
+### 2026-03-23 02:08 CST
+- **CI**: niuma-server ✅ (2026-03-17), niuma-cli ✅ (2026-03-22), niuma-app ✅ (2026-03-17)
+- **新提交**: 无（各仓库 Already up to date）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）；体积正常 ✅
+- **版本一致性**: 各仓库均未变更，与上次巡检一致 ✅
+- 无新问题，无需修复，静默结束
+
+### 2026-03-23 00:08 CST
+- **CI**: niuma-server ✅ (2026-03-17), niuma-cli ✅ (2026-03-22), niuma-desktop ✅ (2026-03-21), niuma-app ✅ (2026-03-17)
+- **新提交**: 无（各仓库 Already up to date）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）；体积正常；各命名前缀正确 ✅
+- **版本一致性**: server=0.1.6, cli=0.1.6, desktop=0.1.6, web=0.1.6 ✅
+- 无新问题，无需修复，静默结束
+
+### 2026-03-22 22:08 CST
+- **CI**: niuma-server ✅ (2026-03-17), niuma-cli ✅ (2026-03-22), niuma-desktop ✅ (2026-03-21), niuma-app ✅ (2026-03-17)
+- **新提交**: 无（各仓库 Already up to date）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）；体积正常；各命名前缀正确 ✅
+- **版本一致性**: server=0.1.6, cli=0.1.6, desktop=0.1.6, web=0.1.6 ✅
+- 无新问题，无需修复，静默结束
+
+### 2026-03-22 20:08 CST
+- **CI**: niuma-server ✅ (2026-03-17), niuma-cli ✅ (2026-03-22), niuma-desktop ✅ (2026-03-21), niuma-app ✅ (2026-03-17)
+- **新提交**: 无（各仓库 Already up to date）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）；体积正常；各命名前缀正确 ✅
+- **版本一致性**: server=0.1.6, cli=0.1.6, desktop=0.1.6, web=0.1.6 ✅
+- 无新问题，无需修复，静默结束
+
+### 2026-03-22 18:08 CST
+- **CI**: niuma-server ✅ (2026-03-17), niuma-cli ✅ (2026-03-22), niuma-desktop ✅ (2026-03-21), niuma-app ✅ (2026-03-17)
+- **新提交**: 无（各仓库已是 already up to date，上次巡检后无新 push）
+- **Release v0.1.6**: 19 产物全部正常（CLI 5 ✅, Server 5 ✅, Desktop 9 ✅）；体积正常；各命名前缀正确 ✅
+- **版本一致性**: server=0.1.6, cli=0.1.6, desktop=0.1.6, web=0.1.6 ✅
+- 无新问题，无需修复，静默结束
 
 ### 2026-03-22 16:08 CST
 - **CI**: niuma-server ✅, niuma-cli ✅, niuma-desktop ✅（最新 run 2026-03-21 成功）, niuma-app ✅（全绿）
