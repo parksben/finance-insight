@@ -1,9 +1,11 @@
 # 2026-03-24 日报
 
-> 由澜投研多 Agent 框架自动生成 · 2026-03-24 01:42 CST
+> 由澜投研多 Agent 框架自动生成 · 2026-03-24 01:51 CST
 
 ## 今日报告
 
+- [🔍 Researcher 情报简报](./research)
+- [📈 Strategist 投资信号](./strategist)
 - [🛡️ RiskGuard 风险评估](./riskguard)
 - [🔴 Challenger 质疑意见](./challenger)
 - [⚖️ Arbiter 最终裁决](./arbiter)
