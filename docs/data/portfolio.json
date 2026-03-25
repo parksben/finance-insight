@@ -9,10 +9,23 @@
     "maxDrawdown": -0.51,
     "winRate": 0,
     "vsCSI300": "全仓现金，黄金ETF止损清仓",
-    "investedValue": 0,
-    "cash": 994917
+    "investedValue": 600,
+    "cash": 994317
   },
-  "positions": [],
+  "positions": [
+    {
+      "symbol": "518790",
+      "name": "电力板块ETF",
+      "direction": "long",
+      "shares": 188.6792,
+      "cost": 3.18,
+      "currentPrice": 3.18,
+      "currentValue": 600,
+      "pnl": 0,
+      "pnlPct": 0,
+      "weight": 0.06
+    }
+  ],
   "navHistory": [
     {
       "date": "2026-03-10",
@@ -159,6 +172,10 @@
     {
       "date": "2026-03-24",
       "nav": 0.994917
+    },
+    {
+      "date": "2026-03-25",
+      "nav": 0.994917
     }
   ],
   "transactions": [
@@ -213,6 +230,15 @@
       "shares": 9401,
       "amount": 97676,
       "note": "跌破止损线10.39（收10.126，-4.53%），纪律性清仓"
+    },
+    {
+      "date": "2026-03-25",
+      "asset": "电力板块ETF",
+      "action": "买入",
+      "shares": 188.6792,
+      "price": 3.18,
+      "amount": -600,
+      "reason": "Arbiter T+0第1笔：6%进攻配置，进场价3.18中值区间，止损3.05"
     }
   ],
   "updatedAt": "2026-03-24"
