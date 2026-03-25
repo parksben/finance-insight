@@ -9,8 +9,8 @@
     "maxDrawdown": -0.51,
     "winRate": 0,
     "vsCSI300": "全仓现金，黄金ETF止损清仓",
-    "investedValue": 600,
-    "cash": 994317
+    "investedValue": 1400,
+    "cash": 993517
   },
   "positions": [
     {
@@ -24,6 +24,18 @@
       "pnl": 0,
       "pnlPct": 0,
       "weight": 0.06
+    },
+    {
+      "symbol": "159919",
+      "name": "沪深300ETF",
+      "direction": "long",
+      "shares": 0.1869,
+      "cost": 4280,
+      "currentPrice": 4280,
+      "currentValue": 800,
+      "pnl": 0,
+      "pnlPct": 0,
+      "weight": 0.08
     }
   ],
   "navHistory": [
@@ -239,6 +251,15 @@
       "price": 3.18,
       "amount": -600,
       "reason": "Arbiter T+0第1笔：6%进攻配置，进场价3.18中值区间，止损3.05"
+    },
+    {
+      "date": "2026-03-25",
+      "asset": "沪深300ETF",
+      "action": "买入",
+      "shares": 0.1869,
+      "price": 4280,
+      "amount": -800,
+      "reason": "Arbiter T+0：16%防守配置，建立底仓，止损4050"
     }
   ],
   "updatedAt": "2026-03-24"
